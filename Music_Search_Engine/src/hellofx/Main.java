@@ -14,7 +14,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("hellofx.fxml"));
-        primaryStage.setTitle("music Search Engine");
+        primaryStage.setTitle("Music Search Engine");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
