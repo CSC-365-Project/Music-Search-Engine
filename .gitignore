@@ -23,6 +23,6 @@
 hs_err_pid*
 
 .vscode
-lib
+Music_Search_Engine/lib
 .DS_Store
 Music_Search_Engine/src/hellofx/.info
