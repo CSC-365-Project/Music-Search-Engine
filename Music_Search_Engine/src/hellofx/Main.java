@@ -22,8 +22,8 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
 
-        Query.init();
-        Query.getAllSong();
+        // Query.init();
+        // Query.getAllSong();
         
         launch(args);
     }

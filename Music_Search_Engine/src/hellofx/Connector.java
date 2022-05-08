@@ -7,8 +7,6 @@ public class Connector {
     static Connection connect;
 
     public static Connection connectdb(String hostname, String userName, String password) {
-        // try to connect to db with given hostname, username, and password
-        // username and password might need further encode
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

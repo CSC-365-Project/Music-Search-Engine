@@ -17,13 +17,17 @@ public class Query {
         connect = Connector.connectdb(info.get(0), info.get(1), info.get(2));
     }
 
-    public static void getAllSong(){
+    public static List<List<String>> getAllSong(){
         // sample query
+        List<List<String>> res = new ArrayList<>();
+
         String selectSQL = "select * from Songs;";
         Statement statement;
         try {
             statement = connect.createStatement();
             ResultSet rs = statement.executeQuery(selectSQL);
+
+            int id = 0;
 
             //sample printing
             while (rs.next()){
@@ -33,16 +37,28 @@ public class Query {
                 String duration= rs.getString("duration");
                 String date= rs.getString("publishDate");
 
-                System.out.println("-------------" + rs.getString(1) + "-------------");
-                System.out.println("Song Name: " + songName);
-                System.out.println("URL: " + url);
-                System.out.println("Popularity: " + popularity);
-                System.out.println("Duration: " + duration);
-                System.out.println("Publish Date: " + date);
+                // System.out.println("-------------" + rs.getString(1) + "-------------");
+                // System.out.println("Song Name: " + songName);
+                // System.out.println("URL: " + url);
+                // System.out.println("Popularity: " + popularity);
+                // System.out.println("Duration: " + duration);
+                // System.out.println("Publish Date: " + date);
+                List<String> info = new ArrayList<>();
+                info.add(songName);
+                info.add(url);
+                info.add(popularity);
+                info.add(duration);
+                info.add(date);
+                res.add(info);
+
+                id++;
+
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return res;
     }
 
     public static List<String> readinfo(String file){
