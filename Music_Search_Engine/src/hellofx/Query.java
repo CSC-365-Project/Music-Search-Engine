@@ -36,13 +36,7 @@ public class Query {
                 String popularity= rs.getString("popularity");
                 String duration= rs.getString("duration");
                 String date= rs.getString("publishDate");
-
-                // System.out.println("-------------" + rs.getString(1) + "-------------");
-                // System.out.println("Song Name: " + songName);
-                // System.out.println("URL: " + url);
-                // System.out.println("Popularity: " + popularity);
-                // System.out.println("Duration: " + duration);
-                // System.out.println("Publish Date: " + date);
+                
                 List<String> info = new ArrayList<>();
                 info.add(songName);
                 info.add(url);
