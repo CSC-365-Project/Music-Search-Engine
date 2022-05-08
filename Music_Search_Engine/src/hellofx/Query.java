@@ -17,18 +17,28 @@ public class Query {
         connect = Connector.connectdb(info.get(0), info.get(1), info.get(2));
     }
 
-    public static void selectAllUsers(){
+    public static void getAllSong(){
         // sample query
-        String selectAllUsers = "select * from TestUsers;";
+        String selectSQL = "select * from Songs;";
         Statement statement;
         try {
             statement = connect.createStatement();
-            ResultSet rs = statement.executeQuery(selectAllUsers);
+            ResultSet rs = statement.executeQuery(selectSQL);
 
             //sample printing
             while (rs.next()){
-                String userName= rs.getString(2);
-                System.out.println("Test User Name: " + userName);
+                String songName= rs.getString("songName");
+                String url= rs.getString("url");
+                String popularity= rs.getString("popularity");
+                String duration= rs.getString("duration");
+                String date= rs.getString("publishDate");
+
+                System.out.println("-------------" + rs.getString(1) + "-------------");
+                System.out.println("Song Name: " + songName);
+                System.out.println("URL: " + url);
+                System.out.println("Popularity: " + popularity);
+                System.out.println("Duration: " + duration);
+                System.out.println("Publish Date: " + date);
             }
         } catch (SQLException e) {
             e.printStackTrace();
