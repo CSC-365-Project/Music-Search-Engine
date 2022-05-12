@@ -1,3 +1,17 @@
+### User related Query 
+# get password 
+select U.pwd from Users U where U.email = {email};
+# add Users
+insert into Users(email, name, pwd) Values ({email}, {name}, {pwd});
+# remove Users by email;
+delete from Users where email = {email}; 
+# remove Users by ID;
+delete from Users where id = {id}; 
+# update Users email, name or pwd.
+update Users set email = {email} where id = {id};
+update Users set name = {name} where id = {id};
+update Users set pwd = {pwd} where id = {id};
+
 #return songname by songID;
 select S.songName from Songs S where S.songID in {songID};
 #For example return all the favorite songName
