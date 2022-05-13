@@ -42,24 +42,19 @@ select A.artistName from Artists A, Songs S where A.artistID = S.artistID and S.
 # get all the album names of a singer
 select distinct S.albumName from Songs S, Artists A where S.artistID = A.artistID and A.artistName = {Name};
 
------------------------Test Needed------------------------
-
-
-#### As user, I want to see the information about a song(author, year, which album it belongs to, genre, duration)
-SELECT A.artistName, S.publishxDate, B.albumName, G.name, S.duration 
+#### As user, I want to see the information about a song(author, year, which album it belongs to, genre, duration) 
+# get all wanted information by searching the song name
+SELECT A.artistName, S.publishDate, B.albumName, G.name, S.duration 
 FROM Songs S, Artists A, Albums B, Genres G
-WHERE(S.songName = "no2", S.albumID = B.albumID, 
-	S.genreID = G.genreId, S.artistID = A.artistID);
+WHERE(S.songName = {name} AND S.albumID = B.albumID AND
+	S.genreID = G.genreId AND S.artistID = A.artistID);
 
-### As user, I want to see the newly released songs within a week
-# Not working
-# Todo
-SELECT DATEDIFF(day, ‘2021/3/10’, ‘2021/3/20’) AS newly_Released_Songs FROM Songs;
+#### As user, I want to see the newly released songs within a week
+SELECT * FROM Songs WHERE publishDate BETWEEN
+{7days before} AND {today’s date};
 
-### As user, I want to see the most popular songs within a week（can do the most popular song among all songs)
-# Not working
-# Todo
-	SELECT * FROM Songs S
-	DATEDIFF(day, ‘2022-5-26’, ‘2022-6-2’)
-	ORDER BY S.popularity DESC
-	LIMIT 10
+#### As user, I want to see the most popular songs within a week (can do the most popular song among all songs) get the top 20
+SELECT * FROM Songs AS S WHERE publishDate BETWEEN
+{7days before} AND {today’s date}
+ORDER BY S.popularity DESC
+LIMIT 20;
