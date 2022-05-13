@@ -25,16 +25,16 @@ select S.songID from Songs S, Artists A where S.artistID = A.artistID and A.arti
 -- #search by genre name;
 select S.songID from Songs S, Genres G where S.genreID = G.genreID and G.name = {genreID};
 
-#### As user, I want a favorite list so I can keep track of musics I like(🉑️）
+#### As user, I want a favorite list so I can keep track of musics I like
 select F.songID from Favorite F where F.userEmail = {email};
 
-#### As user, I want to create custom groups for my musics（🉑️）
+#### As user, I want to create custom groups for my musics
 insert into PlaylistOwnership(playlistName, userEmail) values({playlistName}, {userEmail});
 # add songs into Playlist.
 set @pID = (select P.playlistID from PlaylistOwnership P where P.playlistName = {playlistName);
 insert into PlaylistSongs(playlistID, songID) values (pID, {songID});
 
-#### As user, I want to be able to search an album, and get the lists of songs in the that specific album (along with its singer name)（🉑️）
+#### As user, I want to be able to search an album, and get the lists of songs in the that specific album (along with its singer name)
 # get the lists of songs in the that specific album
 select S.songName from Songs S, Albums A where S.albumID = A.albumID and A.albumName = {albumName};
 # get singer name by songName;
@@ -42,14 +42,16 @@ select A.artistName from Artists A, Songs S where A.artistID = S.artistID and S.
 # get all the album names of a singer
 select distinct S.albumName from Songs S, Artists A where S.artistID = A.artistID and A.artistName = {Name};
 
+-----------------------Test Needed------------------------
 
-#### As user, I want to see the information about a song(author, year, which album it belongs to, genre, duration)（🉑️）
+
+#### As user, I want to see the information about a song(author, year, which album it belongs to, genre, duration)
 SELECT A.artistName, S.publishxDate, B.albumName, G.name, S.duration 
 FROM Songs S, Artists A, Albums B, Genres G
 WHERE(S.songName = "no2", S.albumID = B.albumID, 
 	S.genreID = G.genreId, S.artistID = A.artistID);
 
-### As user, I want to see the newly released songs（🉑️) within a week
+### As user, I want to see the newly released songs within a week
 # Not working
 # Todo
 SELECT DATEDIFF(day, ‘2021/3/10’, ‘2021/3/20’) AS newly_Released_Songs FROM Songs;
