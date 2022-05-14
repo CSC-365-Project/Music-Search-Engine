@@ -18,17 +18,16 @@ public class Query {
         connect = Connector.connectdb(info.get(0), info.get(1), info.get(2));
     }
 
+    // Sample query to return all song in the Song table
     public static List<List<String>> getAllSong(){
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String selectSQL = "select * from Songs;";
+        String sql = "select * from Songs;";
         Statement statement;
         try {
             statement = connect.createStatement();
-            ResultSet rs = statement.executeQuery(selectSQL);
-
-            int id = 0;
+            ResultSet rs = statement.executeQuery(sql);
 
             //sample printing
             while (rs.next()){
@@ -45,10 +44,11 @@ public class Query {
                 info.add(duration);
                 info.add(date);
                 res.add(info);
-
-                id++;
-
             }
+
+            statement.close();
+            connect.commit();
+            connect.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,6 +56,120 @@ public class Query {
         return res;
     }
 
+    public static String getPassword(String email){
+
+        String password = "";
+        String sql = "select U.pwd from Users U where U.email = ?";
+        
+        PreparedStatement statement;
+
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            password = rs.getString("pwd");
+
+            statement.close();
+            connect.commit();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return password;
+    }
+
+    public static void addNewUser(String email, String name, String password) {
+        String sql = "insert into Users(email, name, pwd) Values (?, ?, ?);";
+
+        PreparedStatement statement;
+        
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, email);
+            statement.setString(2, name);
+            statement.setString(3, password);
+
+            statement.executeUpdate();
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<String> removeUser(String email){
+
+        List<String> res = new ArrayList<>();
+
+        String sql = "delete from Users where email = ?; ";
+        String res_sql = "select * from Users where email = ?;";
+
+        PreparedStatement statement;
+        
+        try {
+            connect.setAutoCommit(false);
+            statement = connect.prepareStatement(res_sql);
+            statement.setString(1, email);
+
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            res.add(rs.getString("email"));
+            res.add(rs.getString("name"));
+            res.add(rs.getString("pwd"));
+
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, email);
+            statement.executeUpdate();
+
+            statement.close();
+            connect.commit();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+    
+    public static void updateUserName(String email, String name){
+        String sql = "update Users set name = ? where email = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.executeUpdate();
+            
+            statement.close();
+            connect.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateUserPwd(String email, String pwd){
+        String sql = "update Users set pwd = ? where email = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, pwd);
+            statement.setString(2, email);
+            statement.executeUpdate();
+            
+            statement.close();
+            connect.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     public static List<String> readinfo(String file){
         List<String> info = new ArrayList<String>();
         try {
