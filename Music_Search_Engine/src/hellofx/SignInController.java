@@ -2,43 +2,51 @@
 package hellofx;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.text.Text;
+import javafx.scene.control.TextField;
+import java.io.IOException;
 
 public class SignInController implements Initializable {
 
     @FXML
-    private Label label_welcome;
+    private TextField email_in;
     @FXML
-    private Label label_signUp;
+    private TextField usrName_in;
     @FXML
-    private Button loginButton;
+    private TextField usrPass_in;
     @FXML
-    private Button signUpButton;
-    // @FXML protected void handleSubmitButtonAction(ActionEvent event) {
-    // actiontarget.setText("Sign in button pressed");
-    // }
+    private TextField usrPass_conf;
+    @FXML
+    private Button login_button;
+    @FXML
+    private Button signUp_button;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
-        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-
+        Query.init();
+        login_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // TODO Auto-generated method stub
-
+                try {
+                    LoginUtil.changeScene(event, "login.fxml", "Login", null, null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-
         });
-        Query.init();
+
+        signUp_button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                LoginUtil.signUpUser(event, email_in, usrName_in, usrPass_in, usrPass_conf);
+            }
+        });
     }
+
 }

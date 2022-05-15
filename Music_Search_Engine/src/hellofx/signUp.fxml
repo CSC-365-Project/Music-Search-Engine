@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -10,15 +11,13 @@
    <children>
       <TextField fx:id="email_in" layoutX="224.0" layoutY="85.0" promptText="enter email" />
       <TextField fx:id="usrName_in" layoutX="226.0" layoutY="137.0" promptText="create user name" />
-      <TextField fx:id="usrPass_in" layoutX="224.0" layoutY="187.0" promptText="create password" />
-      <TextField fx:id="userPass_conf" layoutX="226.0" layoutY="231.0" promptText="confirm password" />
       <Button fx:id="signUp_button" layoutX="270.0" layoutY="297.0" mnemonicParsing="false" text="Sign Up" />
       <Text layoutX="143.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="143.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
+      <Text fx:id="text_usrName" layoutX="143.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name">
          <font>
             <Font size="15.0" />
          </font>
@@ -28,6 +27,8 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button fx:id="login_button" layoutX="459.0" layoutY="339.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Login" textFill="#0015ff" />
+      <Button fx:id="login_button" layoutX="459.0" layoutY="339.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Login" textFill="#0015ff" />
+      <PasswordField fx:id="usrPass_in" layoutX="226.0" layoutY="186.0" promptText="enter password" />
+      <PasswordField fx:id="usrPass_conf" layoutX="226.0" layoutY="237.0" promptText="confirm password" />
    </children>
 </AnchorPane>

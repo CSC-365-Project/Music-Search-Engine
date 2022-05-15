@@ -29,9 +29,6 @@ public class Controller {
                 // javaVersion + ".");
         }
 
-        public void login(ActionEvent event) {
-
-        }
         // @FXML protected void handleSubmitButtonAction(ActionEvent event) {
         // actiontarget.setText("Sign in button pressed");
         // }
