@@ -67,11 +67,10 @@ public class Query {
             statement = connect.prepareStatement(sql);
             statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
-            rs.next();
-            password = rs.getString("pwd");
+            if(rs.next())
+                password = rs.getString("pwd");
 
             statement.close();
-            connect.commit();
             connect.close();
 
         } catch (SQLException e) {
