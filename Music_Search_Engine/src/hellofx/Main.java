@@ -24,16 +24,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws Exception {
-
-        Query.init();
-        List<List<String>> res = Query.getFavList("xcvna@gmail.com");
-
-        System.out.println("Song Name: " + res.get(0).get(0) + "\n" +
-        "URL: " + res.get(0).get(1) + "\n" +
-        "Popularity: " + res.get(0).get(2) + "\n" +
-        "Duration: " + res.get(0).get(3) + "\n" +
-        "Publish Date: " + res.get(0).get(4) + "\n");
-
+        
         launch(args);
     }
 }

@@ -207,6 +207,59 @@ public class Query {
         }
         return res;
     }
+
+    public static void addNewPlaylist(String playlistName, String userEmail) {
+
+        String sql = "insert into PlaylistOwnership(playlistName, userEmail) values(?, ?)";
+
+        PreparedStatement statement;
+
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, playlistName);
+            statement.setString(2, userEmail);
+            statement.executeUpdate();
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // public static void addToPlaylist(String playlistName) {
+
+    //     String sql = "select P.playlistID from PlaylistOwnership P where P.playlistName = ?";
+    //     String res_sql = "insert into PlaylistSongs(playlistID, songID) values (pID, ?)";
+
+    //     PreparedStatement statement;
+
+    //     try {
+    //         connect.setAutoCommit(false);
+    //         statement = connect.prepareStatement(res_sql);
+    //         statement.setString(1, email);
+
+    //         ResultSet rs = statement.executeQuery();
+    //         rs.next();
+    //         res.add(rs.getString("email"));
+    //         res.add(rs.getString("name"));
+    //         res.add(rs.getString("pwd"));
+
+    //         statement = connect.prepareStatement(sql);
+    //         statement.setString(1, email);
+    //         statement.executeUpdate();
+
+    //         statement.close();
+    //         connect.commit();
+    //         connect.close();
+
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+
+
     
     public static List<String> readinfo(String file){
         List<String> info = new ArrayList<String>();

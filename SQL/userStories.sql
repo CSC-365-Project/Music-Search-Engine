@@ -32,8 +32,8 @@ select F.songID from Favorite F where F.userEmail = {email};
 #### As user, I want to create custom groups for my musics
 insert into PlaylistOwnership(playlistName, userEmail) values({playlistName}, {userEmail});
 # add songs into Playlist.
-set @pID = (select P.playlistID from PlaylistOwnership P where P.playlistName = {playlistName);
-insert into PlaylistSongs(playlistID, songID) values (pID, {songID});
+set @pID = (select P.playlistID from PlaylistOwnership P where P.playlistName = {playlistName});
+insert into PlaylistSongs(playlistID, songID) values (@pID, {songID});
 
 #### As user, I want to be able to search an album, and get the lists of songs in the that specific album (along with its singer name)
 # get the lists of songs in the that specific album
