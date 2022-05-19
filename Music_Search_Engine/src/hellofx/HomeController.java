@@ -11,7 +11,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class HomeController {
-    public void initialize() {
+    @FXML
+    private Text user_name;
+
+    public void initData(TextField email) {
         Query.init();
+        user_name.setText("Hello," + email.getText());
+    }
+
+    public void initialize() {
     }
 }
