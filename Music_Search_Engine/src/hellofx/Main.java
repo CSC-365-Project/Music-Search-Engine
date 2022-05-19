@@ -1,6 +1,7 @@
 package hellofx;
 
 import java.sql.*;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,16 +18,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("Music Search Engine");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 
     }
 
     public static void main(String[] args) throws Exception {
-
-        // Query.init();
-        // Query.getAllSong();
-
+        
         launch(args);
     }
 }

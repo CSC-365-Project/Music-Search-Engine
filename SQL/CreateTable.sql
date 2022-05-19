@@ -56,6 +56,7 @@ Create Table Songs(
 	foreign key (genreID) references Genres(genreID)
 		on delete set null
         on update no action
+    Unique uniqueSongs (songName, artistID);
 );
 
 #Favorite(id, userEmail, songId)
@@ -70,6 +71,8 @@ Create Table Favorite(
     foreign key (songID) references Songs(songID)
 		on delete cascade
         on update no action
+    #trigger afterinsert Songs.popularity += 1
+    #trigger afterdelete Songs.populartiy -= 1
 );
 
 #PlaylistOwnership(playlistID, userEmail)
