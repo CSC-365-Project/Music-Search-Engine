@@ -1,11 +1,15 @@
 ### User related Query 
 # get password 
+//DONE
 select U.pwd from Users U where U.email = {email};
 # add Users
+//DONE
 insert into Users(email, name, pwd) Values ({email}, {name}, {pwd});
 # remove Users by email;
+//DONE
 delete from Users where email = {email}; 
 # update Users email, name or pwd.
+//DONE
 update Users set name = {name} where email = {email};
 update Users set pwd = {pwd} where email = {email};
 
