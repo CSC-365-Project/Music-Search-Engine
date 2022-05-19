@@ -279,7 +279,4 @@ public class Query {
         }
         return info;
     }
-
-
-    
 }
