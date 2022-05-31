@@ -9,12 +9,13 @@ delete from Users where email = {email};
 update Users set name = {name} where email = {email};
 update Users set pwd = {pwd} where email = {email};
 
-### return songname by songID;
+# return songname by songID;
 select S.songName from Songs S where S.songID in {songID};
 #For example return all the favorite songName
 select S.songName from Songs S where S.songID in (select F.songID from Favorite F where F.userEmail = "12341@gmail.com");
 
-### As user, I want to be able to search music by name, artist, and/or genre.
+# do we need to return songID to user?
+# As user, I want to be able to search music by name, artist, and/or genre.
 -- #search by song name
 select S.songID from Songs S where S.songName = {name};
 -- #search by artist name

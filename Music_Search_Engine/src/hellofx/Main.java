@@ -19,14 +19,13 @@ public class Main extends Application {
         primaryStage.setTitle("Music Search Engine");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
-
     }
 
     public static void main(String[] args) throws Exception {
 
         // Query.init();
         // Query.getAllSong();
-
+        Query.getFavoriteSongs("12341@gmail.com");
         launch(args);
     }
 }
