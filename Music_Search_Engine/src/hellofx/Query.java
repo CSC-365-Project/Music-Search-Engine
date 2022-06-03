@@ -69,7 +69,7 @@ public class Query {
             ResultSet rs = statement.executeQuery();
             if (rs.next())
                 password = rs.getString("pwd");
-
+                
             statement.close();
             connect.close();
 
@@ -80,7 +80,7 @@ public class Query {
     }
 
     public static void addNewUser(String email, String name, String password) {
-        String sql = "insert into Users(email, name, pwd) Values (?, ?, ?);";
+        String sql = "insert into Users(email, name, pwd) Values (?, ?, ?)";
 
         PreparedStatement statement;
 
@@ -104,8 +104,8 @@ public class Query {
 
         List<String> res = new ArrayList<>();
 
-        String sql = "delete from Users where email = ?; ";
-        String res_sql = "select * from Users where email = ?;";
+        String sql = "delete from Users where email = ?";
+        String res_sql = "select * from Users where email = ?";
 
         PreparedStatement statement;
 
@@ -136,7 +136,7 @@ public class Query {
     }
 
     public static void updateUserName(String email, String name) {
-        String sql = "update Users set name = ? where email = ?;";
+        String sql = "update Users set name = ? where email = ?";
 
         PreparedStatement statement;
         try {
@@ -153,7 +153,7 @@ public class Query {
     }
 
     public static void updateUserPwd(String email, String pwd) {
-        String sql = "update Users set pwd = ? where email = ?;";
+        String sql = "update Users set pwd = ? where email = ?";
 
         PreparedStatement statement;
         try {
@@ -190,7 +190,7 @@ public class Query {
 
     public static String getSongName(int songID) {
         String songName = "";
-        String sql = "select S.songName from Songs S where S.songID = ?;";
+        String sql = "select S.songName from Songs S where S.songID = ?";
 
         PreparedStatement statement;
         try {
@@ -198,7 +198,7 @@ public class Query {
             statement.setInt(1, songID);
             ResultSet rs = statement.executeQuery();
             if (rs.next())
-                songName = rs.getString("songID");
+                songName = rs.getString("songName");
 
             statement.close();
             connect.close();
@@ -211,7 +211,7 @@ public class Query {
 
     public static List<String> getFavoriteSongs(String email) {
         List<String> songNames = new ArrayList<String>();
-        String sql = "select F.songID from Favorite F where F.userEmail = ?;";
+        String sql = "select S.songName from Songs S where S.songID in (select F.songID from Favorite F where F.userEmail = ?)";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
@@ -219,8 +219,7 @@ public class Query {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                int songID = rs.getInt("songName");
-                String name = getSongName(songID);
+                String name = rs.getString("songName");
                 songNames.add(name);
             }
 
@@ -242,7 +241,7 @@ public class Query {
             statement.setString(1, songName);
             ResultSet rs = statement.executeQuery();
             if (rs.next())
-                songID = rs.getInt(songName);
+                songID = rs.getInt("songID");
 
             statement.close();
             connect.close();
@@ -255,7 +254,7 @@ public class Query {
 
     public static List<Integer> searchByArtist(String artistName) {
         List<Integer> songIDs = new ArrayList<Integer>();
-        String sql = "select S.songID from Songs S, Artists A where S.artistID = A.artistID and A.artistName = {artistName};";
+        String sql = "select S.songID from Songs S, Artists A where S.artistID = A.artistID and A.artistName = ?";
 
         PreparedStatement statement;
         try {
@@ -264,7 +263,7 @@ public class Query {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                int songID = rs.getInt(artistName);
+                int songID = rs.getInt("songID");
                 songIDs.add(songID);
             }
 
@@ -279,7 +278,7 @@ public class Query {
 
     public static List<Integer> searchByGenre(String genreName) {
         List<Integer> songIDs = new ArrayList<Integer>();
-        String sql = "select S.songID from Songs S, Genres G where S.genreID = G.genreID and G.name = {genreID};";
+        String sql = "select S.songID from Songs S, Genres G where S.genreID = G.genreID and G.name = ?";
 
         PreparedStatement statement;
         try {
@@ -288,7 +287,7 @@ public class Query {
             ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                int songID = rs.getInt(genreName);
+                int songID = rs.getInt("songID");
                 songIDs.add(songID);
             }
 
@@ -301,9 +300,9 @@ public class Query {
         return songIDs;
     }
 
-    public static createFavoriteList(){
+    // public static createFavoriteList(){
 
-    }
+    // }
 
 
 
