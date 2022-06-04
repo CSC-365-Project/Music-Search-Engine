@@ -421,4 +421,40 @@ public class Query {
         return albumNames;
     }
 
+    public static List<String> getSongInfo(String songName) {
+
+        List<String> info = new ArrayList<>();
+
+        String sql = "SELECT A.artistName,S.publishDate,B.albumName,G.name,S.duration FROM Songs S, Artists A, Albums B, Genres G WHERE(S.songName = ? AND S.albumID = B.albumID AND S.genreID = G.genreId AND S.artistID = A.artistID)";
+
+        PreparedStatement statement;
+        try {
+
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, songName);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                String artistName = rs.getString("artistName");
+                String publishDate = rs.getString("publishDate");
+                String albumName = rs.getString("albumName");
+                String name = rs.getString("name");
+                String duration = rs.getString("duration");
+
+                info.add(artistName+"\n");
+                info.add(publishDate+"\n");
+                info.add(albumName+"\n");
+                info.add(name+"\n");
+                info.add(duration+"\n");
+            }
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return info;
+    }
+
 }
