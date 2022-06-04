@@ -39,7 +39,7 @@ select S.songName from Songs S, Albums A where S.albumID = A.albumID and A.album
 # get singer name by songName;
 select A.artistName from Artists A, Songs S where A.artistID = S.artistID and S.songName = {songName};
 # get all the album names of a singer
-select distinct S.albumName from Songs S, Artists A where S.artistID = A.artistID and A.artistName = {Name};
+select A.albumName from Albums A where A.albumID = (select distinct S.albumID from Songs S, Artists A where S.artistID = A.artistID and A.artistName = ?)
 
 #### As user, I want to see the information about a song(author, year, which album it belongs to, genre, duration) 
 # get all wanted information by searching the song name

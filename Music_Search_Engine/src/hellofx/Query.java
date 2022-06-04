@@ -385,7 +385,7 @@ public class Query {
             ResultSet rs = statement.executeQuery();
 
             if (rs.next())
-            artistName = rs.getString("artistName");
+                artistName = rs.getString("artistName");
 
             statement.close();
             connect.close();
@@ -394,6 +394,31 @@ public class Query {
             e.printStackTrace();
         }
         return artistName;
+    }
+
+    public static List<String> getAlbumNameByArtists(String artistName) {
+        String sql = "select A.albumName from Albums A where A.albumID = (select distinct S.albumID from Songs S, Artists A where S.artistID = A.artistID and A.artistName = ?)";
+        List<String> albumNames = new ArrayList<String>();
+        String albumName = "";
+
+        PreparedStatement statement;
+
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, artistName);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                albumName = rs.getString("albumName");
+                albumNames.add(albumName);
+            }
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return albumNames;
     }
 
 }
