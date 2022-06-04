@@ -56,6 +56,7 @@ Create Table Songs(
 	foreign key (genreID) references Genres(genreID)
 		on delete set null
         on update no action
+    UNIQUE uniqueSong(songName, artistID);
 );
 
 #Favorite(id, userEmail, songId)

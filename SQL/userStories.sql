@@ -9,12 +9,13 @@ delete from Users where email = {email};
 update Users set name = {name} where email = {email};
 update Users set pwd = {pwd} where email = {email};
 
-### return songname by songID;
+# return songname by songID;
 select S.songName from Songs S where S.songID in {songID};
 #For example return all the favorite songName
-select S.songName from Songs S where S.songID in (select F.songID from Favorite F where F.userEmail = "12341@gmail.com");
+select S.songName from Songs S where S.songID in (select F.songID from Favorite F where F.userEmail = ?);
 
-### As user, I want to be able to search music by name, artist, and/or genre.
+# do we need to return songID to user?
+# As user, I want to be able to search music by name, artist, and/or genre.
 -- #search by song name
 select S.songID from Songs S where S.songName = {name};
 -- #search by artist name
@@ -22,13 +23,14 @@ select S.songID from Songs S, Artists A where S.artistID = A.artistID and A.arti
 -- #search by genre name;
 select S.songID from Songs S, Genres G where S.genreID = G.genreID and G.name = {genreID};
 
+-- this one is duplicated with the one above
 #### As user, I want a favorite list so I can keep track of musics I like
 select F.songID from Favorite F where F.userEmail = {email};
 
 #### As user, I want to create custom groups for my musics
 insert into PlaylistOwnership(playlistName, userEmail) values({playlistName}, {userEmail});
 # add songs into Playlist.
-set @pID = (select P.playlistID from PlaylistOwnership P where P.playlistName = {playlistName);
+set @pID = (select P.playlistID from PlaylistOwnership P where P.playlistName = {playlistName});
 insert into PlaylistSongs(playlistID, songID) values (pID, {songID});
 
 #### As user, I want to be able to search an album, and get the lists of songs in the that specific album (along with its singer name)
@@ -37,7 +39,7 @@ select S.songName from Songs S, Albums A where S.albumID = A.albumID and A.album
 # get singer name by songName;
 select A.artistName from Artists A, Songs S where A.artistID = S.artistID and S.songName = {songName};
 # get all the album names of a singer
-select distinct S.albumName from Songs S, Artists A where S.artistID = A.artistID and A.artistName = {Name};
+select A.albumName from Albums A where A.albumID = (select distinct S.albumID from Songs S, Artists A where S.artistID = A.artistID and A.artistName = ?)
 
 #### As user, I want to see the information about a song(author, year, which album it belongs to, genre, duration) 
 # get all wanted information by searching the song name
