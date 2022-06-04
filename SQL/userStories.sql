@@ -12,7 +12,7 @@ update Users set pwd = {pwd} where email = {email};
 # return songname by songID;
 select S.songName from Songs S where S.songID in {songID};
 #For example return all the favorite songName
-select S.songName from Songs S where S.songID in (select F.songID from Favorite F where F.userEmail = "12341@gmail.com");
+select S.songName from Songs S where S.songID in (select F.songID from Favorite F where F.userEmail = ?);
 
 # do we need to return songID to user?
 # As user, I want to be able to search music by name, artist, and/or genre.
@@ -23,13 +23,14 @@ select S.songID from Songs S, Artists A where S.artistID = A.artistID and A.arti
 -- #search by genre name;
 select S.songID from Songs S, Genres G where S.genreID = G.genreID and G.name = {genreID};
 
+-- this one is duplicated with the one above
 #### As user, I want a favorite list so I can keep track of musics I like
 select F.songID from Favorite F where F.userEmail = {email};
 
 #### As user, I want to create custom groups for my musics
 insert into PlaylistOwnership(playlistName, userEmail) values({playlistName}, {userEmail});
 # add songs into Playlist.
-set @pID = (select P.playlistID from PlaylistOwnership P where P.playlistName = {playlistName);
+set @pID = (select P.playlistID from PlaylistOwnership P where P.playlistName = {playlistName});
 insert into PlaylistSongs(playlistID, songID) values (pID, {songID});
 
 #### As user, I want to be able to search an album, and get the lists of songs in the that specific album (along with its singer name)
