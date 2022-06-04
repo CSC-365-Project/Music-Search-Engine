@@ -2,6 +2,7 @@ package hellofx;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,12 +27,12 @@ public class Main extends Application {
 
         Query.init();
         // Query.getAllSong();
-        List<List<String>> res = new ArrayList<>();
-        res = Query.getNewReleasedSong();
-        for(int i = 0; i<res.size(); i++){
-            System.out.printf(res.get(i))
-        }
-
+        // List<List<String>> res = new ArrayList<>();
+        // res = Query.getRecentPopularSong();
+        // for(int i = 0; i<res.size(); i++){
+        //     System.out.print(res.get(i));
+        // }
+        Query.createFavoriteList("somename","12341@gmail.com");
         launch(args);
     }
 }

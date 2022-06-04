@@ -300,26 +300,26 @@ public class Query {
         return songIDs;
     }
 
-    // public static void createFavoriteList(String plName, String userEmail) {
-    // String sql = "insert into PlaylistOwnership(playlistName, userEmail)
-    // values(?, ?)";
+    public static void createFavoriteList(String plName, String userEmail) {
+        String sql = "insert into PlaylistOwnership(playlistName, userEmail) values (?, ?)";
 
-    // PreparedStatement statement;
+        PreparedStatement statement;
 
-    // try {
-    // statement = connect.prepareStatement(sql);
-    // statement.setString(1, playlistName);
-    // statement.setString(2, userEmail);
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, plName);
+            statement.setString(2, userEmail);
 
-    // statement.executeUpdate();
+            statement.executeUpdate();
 
-    // statement.close();
-    // connect.close();
+            statement.close();
+            connect.close();
 
-    // } catch (SQLException e) {
-    // e.printStackTrace();
-    // }
-    // }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // System.out.print("insert success!");
+    }
 
     public static void addToPlayList(String songName, int playlistID) {
         String sql1 = "select P.playlistID from PlaylistOwnership P where P.playlistName = ?)";
@@ -457,6 +457,8 @@ public class Query {
         return info;
     }
 
+    // the data printed is not well formated, but works
+    // need to update the time when running
     public static List<List<String>> getNewReleasedSong() {
         // sample query
         List<List<String>> res = new ArrayList<>();
@@ -476,11 +478,49 @@ public class Query {
                 String date = rs.getString("publishDate");
 
                 List<String> info = new ArrayList<>();
-                info.add(songName+" ");
-                info.add(url+" ");
-                info.add(popularity+" ");
-                info.add(duration+" ");
-                info.add(date+"\n");
+                info.add(songName);
+                info.add(url);
+                info.add(popularity);
+                info.add(duration);
+                info.add(date + "\n");
+                res.add(info);
+            }
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    // the data printed is not well formated, but works
+    // need to update the time and number of songs(LIMIT) when running
+    public static List<List<String>> getRecentPopularSong() {
+        // sample query
+        List<List<String>> res = new ArrayList<>();
+
+        String sql = "SELECT * FROM Songs S WHERE publishDate BETWEEN '2021-3-17' AND '2021-3-21'ORDER BY S.popularity DESC LIMIT 3";
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            // sample printing
+            while (rs.next()) {
+                String songName = rs.getString("songName");
+                String url = rs.getString("url");
+                String popularity = rs.getString("popularity");
+                String duration = rs.getString("duration");
+                String date = rs.getString("publishDate");
+
+                List<String> info = new ArrayList<>();
+                info.add(songName);
+                info.add(url);
+                info.add(popularity);
+                info.add(duration);
+                info.add(date + "\n");
                 res.add(info);
             }
 
