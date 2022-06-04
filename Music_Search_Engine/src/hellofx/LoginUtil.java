@@ -12,14 +12,14 @@ import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
 
 public class LoginUtil {
-    public static void changeScene(ActionEvent event, String fxmlFile, String title, TextField email,
-            TextField password)
+    public static void changeScene(ActionEvent event, String fxmlFile, String title, String email,
+            String password, String searchText)
             throws IOException {
         Parent root = null;
         Query.init();
 
         if (email != null && password != null) {
-            if (Query.getPassword(email.getText()).compareTo(password.getText()) == 0) {
+            if (Query.getPassword(email).compareTo(password) == 0) {
                 FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
                 root = loader.load();
                 HomeController controller = loader.getController();
@@ -31,6 +31,12 @@ public class LoginUtil {
                 a.show();
                 return;
             }
+        } else if (searchText != null) {
+            FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+            root = loader.load();
+            SearchController controller = loader.getController();
+            controller.initData(searchText, email);
+
         } else {
             root = FXMLLoader.load(LoginUtil.class.getResource(fxmlFile));
         }
