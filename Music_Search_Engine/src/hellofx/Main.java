@@ -1,6 +1,7 @@
 package hellofx;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,9 +24,14 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
 
-        // Query.init();
+        Query.init();
         // Query.getAllSong();
-        Query.getFavoriteSongs("12341@gmail.com");
+        List<List<String>> res = new ArrayList<>();
+        res = Query.getNewReleasedSong();
+        for(int i = 0; i<res.size(); i++){
+            System.out.printf(res.get(i))
+        }
+
         launch(args);
     }
 }

@@ -441,11 +441,11 @@ public class Query {
                 String name = rs.getString("name");
                 String duration = rs.getString("duration");
 
-                info.add(artistName+"\n");
-                info.add(publishDate+"\n");
-                info.add(albumName+"\n");
-                info.add(name+"\n");
-                info.add(duration+"\n");
+                info.add(artistName + "\n");
+                info.add(publishDate + "\n");
+                info.add(albumName + "\n");
+                info.add(name + "\n");
+                info.add(duration + "\n");
             }
 
             statement.close();
@@ -455,6 +455,42 @@ public class Query {
             e.printStackTrace();
         }
         return info;
+    }
+
+    public static List<List<String>> getNewReleasedSong() {
+        // sample query
+        List<List<String>> res = new ArrayList<>();
+
+        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2021-3-17' AND '2021-3-21'";
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery(sql);
+
+            // sample printing
+            while (rs.next()) {
+                String songName = rs.getString("songName");
+                String url = rs.getString("url");
+                String popularity = rs.getString("popularity");
+                String duration = rs.getString("duration");
+                String date = rs.getString("publishDate");
+
+                List<String> info = new ArrayList<>();
+                info.add(songName+" ");
+                info.add(url+" ");
+                info.add(popularity+" ");
+                info.add(duration+" ");
+                info.add(date+"\n");
+                res.add(info);
+            }
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
 }
