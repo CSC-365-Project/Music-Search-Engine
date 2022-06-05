@@ -4,7 +4,6 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Insets;
 
 public class Query {
 
@@ -12,7 +11,7 @@ public class Query {
 
     public static void init(){
 
-        List<String> info = readinfo("Music_Search_Engine/src/hellofx/.info");
+        List<String> info = readinfo("src/main/java/hellofx/.info");
 
         // Getting connection from shared db.
         connect = Connector.connectdb(info.get(0), info.get(1), info.get(2));
