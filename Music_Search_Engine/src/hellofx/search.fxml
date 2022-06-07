@@ -14,11 +14,11 @@
       <Button fx:id="byName" layoutX="49.0" layoutY="77.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="155.0" text="Name" />
       <Button fx:id="byArtist" layoutX="222.0" layoutY="76.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" text="Artist" />
       <Button fx:id="byGenre" layoutX="395.0" layoutY="76.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="155.0" text="Genre" />
-      <TableView layoutX="49.0" layoutY="121.0" prefHeight="262.0" prefWidth="502.0">
+      <TableView fx:id="songTable" layoutX="49.0" layoutY="121.0" prefHeight="262.0" prefWidth="502.0">
         <columns>
-          <TableColumn prefWidth="162.4000244140625" text="Song Name" />
-          <TableColumn prefWidth="172.0" text="Artist Name" />
-            <TableColumn minWidth="1.60003662109375" prefWidth="170.4000244140625" text="Genre" />
+          <TableColumn fx:id="songNameColumn" prefWidth="162.4000244140625" text="Song Name" />
+          <TableColumn fx:id="artistColumn" prefWidth="172.0" text="Artist Name" />
+            <TableColumn fx:id="genreColumn" minWidth="1.60003662109375" prefWidth="170.4000244140625" text="Genre" />
         </columns>
       </TableView>
    </children>
