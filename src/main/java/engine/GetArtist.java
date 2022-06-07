@@ -43,4 +43,30 @@ public class GetArtist {
         }
         return "";
     }
+
+    public static String getArtistFollowersById(String ArtistId) {
+        try {
+            GetArtistRequest getArtistRequest = spotifyApi.getArtist(ArtistId)
+                    .build();
+            Artist artist = getArtistRequest.execute();
+
+            return artist.getFollowers().getTotal().toString();
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return "";
+    }
+
+    public static String getArtistTypeById(String ArtistId) {
+        try {
+            GetArtistRequest getArtistRequest = spotifyApi.getArtist(ArtistId)
+                    .build();
+            Artist artist = getArtistRequest.execute();
+
+            return artist.getType().toString();
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return "";
+    }
 }

@@ -2,6 +2,7 @@ package engine;
 
 import engine.Authorization;
 import engine.GetArtist;
+import hellofx.Query;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.*;
@@ -11,6 +12,10 @@ import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest
 import se.michaelthelin.spotify.requests.data.search.simplified.SearchArtistsRequest;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Spotify {
 
@@ -46,9 +51,8 @@ public class Spotify {
 //          .additionalTypes("track,episode")
                     .build();
             final Paging<PlaylistTrack> playlistTrackPaging = getPlaylistsItemsRequest.execute();
-
-            for (int i = 0; i < playlistTrackPaging.getTotal(); i++) {
-                System.out.println(i+1 + ": ");
+            Query.init();
+            for (int i = 2; i < 7; i++) {
                 String songId = playlistTrackPaging.getItems()[i].getTrack().getId();
                 String songName = playlistTrackPaging.getItems()[i].getTrack().getName();
                 String url = "https://open.spotify.com/track/" + (playlistTrackPaging.getItems()[i].getTrack()).getId();
@@ -58,30 +62,25 @@ public class Spotify {
                 if (((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getReleaseDatePrecision().toString().equals("YEAR")){
                     publishDate = publishDate + "-01-01";
                 }
-                String artistName = ((Track) playlistTrackPaging.getItems()[i].getTrack()).getArtists()[0].getName();
+
                 String artistId = ((Track) playlistTrackPaging.getItems()[i].getTrack()).getArtists()[0].getId();
 
                 String albumName = ((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getName();
                 String albumId = ((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getId();
 
-                System.out.println("song's id: " + songId);
-                System.out.println("song's name: " + songName);
-                System.out.println("url: " + url);
-                System.out.println("Popularity :" + popularity);
-                System.out.println("Duration :" + durationMS);
-                System.out.println("Publish Date :" + publishDate);
-
-                System.out.println("Track's artist name: " + artistName);
-                System.out.println("Track's artist id: " + artistId);
-
-                System.out.println("Album's name: " + albumName);
-                System.out.println("Album's id: " + albumId);
-
+                String artistName = GetArtist.getArtistNameById(artistId);
                 String genres = GetArtist.getArtistGenresById(artistId);
-                System.out.println("genres = " + genres);
+                String followers = GetArtist.getArtistFollowersById(artistId);
+                String type = GetArtist.getArtistTypeById(artistId);
+
+                List<String> songInfo = Arrays.asList(songId, songName, url, popularity, durationMS, publishDate, artistId, albumId, genres);
+                Query.insertSong(songInfo);
             }
+            Query.close();
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

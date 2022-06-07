@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("Music Search Engine");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
@@ -23,9 +23,14 @@ public class Main extends Application {
 
     public static void main(String[] args) throws Exception {
 
-        // Query.init();
+        Query.init();
         // Query.getAllSong();
-
+        // List<List<String>> res = new ArrayList<>();
+        // res = Query.getRecentPopularSong();
+        // for(int i = 0; i<res.size(); i++){
+        //     System.out.print(res.get(i));
+        // }
+        Query.createFavoriteList("somename", "12341@gmail.com");
         launch(args);
     }
 }
