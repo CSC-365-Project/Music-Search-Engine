@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6969cb0-f170-4400-869f-996a93669f1a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/engine/GetAlbum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/engine/GetArtist.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/engine/GetSong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/engine/Spotify.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hellofx/Authorization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/engine/Authorization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hellofx/Spotify.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,13 +63,31 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Spotify">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="hellofx.Main" />
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="engine" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.hellofx.Spotify">
+    <configuration name="GetAlbum" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="engine.GetAlbum" />
       <module name="Music-Search-Engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="hellofx.*" />
+          <option name="PATTERN" value="engine.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GetSong" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="engine.GetSong" />
+      <module name="Music-Search-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="engine.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -70,11 +96,11 @@
       </method>
     </configuration>
     <configuration name="Spotify" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="hellofx.Spotify" />
+      <option name="MAIN_CLASS_NAME" value="engine.Spotify" />
       <module name="Music-Search-Engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="hellofx.*" />
+          <option name="PATTERN" value="engine.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -82,27 +108,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="getPlaylist" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="engine.GetArtist" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="engine.GetArtist" />
+      <module name="Music-Search-Engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="engine.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="hellofx.getPlaylist" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hellofx.getPlaylist" />
       <module name="Music-Search-Engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="hellofx.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="hellofx.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="hellofx.Main" />
-      <module name="Music-Search-Engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="hellofx.*" />
+          <option name="PATTERN" value="engine.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -112,10 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Spotify" />
-        <item itemvalue="Application.getPlaylist" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.hellofx.Main" />
+        <item itemvalue="Application.hellofx.Spotify" />
+        <item itemvalue="Application.hellofx.GetSong" />
+        <item itemvalue="Application.engine.GetArtist" />
+        <item itemvalue="Application.hellofx.GetAlbum" />
+        <item itemvalue="Application.hellofx.getPlaylist" />
       </list>
     </recent_temporary>
   </component>
@@ -135,7 +160,7 @@
       <workItem from="1654401471005" duration="72000" />
       <workItem from="1654401631267" duration="110000" />
       <workItem from="1654404838320" duration="6104000" />
-      <workItem from="1654562241686" duration="7815000" />
+      <workItem from="1654562241686" duration="20331000" />
     </task>
     <servers />
   </component>

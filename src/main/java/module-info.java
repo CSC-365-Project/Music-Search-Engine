@@ -9,4 +9,6 @@ module engine.music {
 
     opens hellofx to javafx.fxml;
     exports hellofx;
+    exports engine;
+    opens engine to javafx.fxml;
 }
