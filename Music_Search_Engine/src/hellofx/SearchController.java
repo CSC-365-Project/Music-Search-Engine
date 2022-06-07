@@ -53,26 +53,26 @@ public class SearchController {
         ObservableList<Album> displayList = FXCollections.observableArrayList();
         if (searchText.equals("")) {
             for (List<String> list : lst) {
-                int songID = Integer.parseInt(list.get(0));
+                String songID = list.get(0);
                 Query.init();
                 String songName = Query.findSongNamebyID(songID);
                 Query.init();
                 String artistName = Query.findArtistNamebyID(songID);
                 Query.init();
                 String genre = Query.findGenrebyID(songID);
-                displayList.add(new Album(songName, artistName, genre));
+                displayList.add(new Album(songName, artistName, genre, songID));
             }
         } else {
             Query.init();
-            List<Integer> listOfID = Query.searchByName(searchText);
-            for (Integer songID : listOfID) {
+            List<String> listOfID = Query.searchByName(searchText);
+            for (String songID : listOfID) {
                 Query.init();
                 String songName = Query.findSongNamebyID(songID);
                 Query.init();
                 String artistName = Query.findArtistNamebyID(songID);
                 Query.init();
                 String genre = Query.findGenrebyID(songID);
-                displayList.add(new Album(songName, artistName, genre));
+                displayList.add(new Album(songName, artistName, genre, songID));
             }
 
             // List<String> searchArray = Arrays.asList(searchText.split(" "));
@@ -119,21 +119,69 @@ public class SearchController {
         });
 
         byName.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
                 // TODO Auto-generated method stub
                 ObservableList<Album> displayList = FXCollections.observableArrayList();
                 Query.init();
-                List<Integer> listOfID = Query.searchByName(searchText.getText().trim());
-                for (Integer songID : listOfID) {
+                List<String> listOfID = Query.searchByName(searchText.getText().trim());
+                for (String songID : listOfID) {
                     Query.init();
                     String songName = Query.findSongNamebyID(songID);
                     Query.init();
                     String artistName = Query.findArtistNamebyID(songID);
                     Query.init();
                     String genre = Query.findGenrebyID(songID);
-                    displayList.add(new Album(songName, artistName, genre));
+                    displayList.add(new Album(songName, artistName, genre, songID));
+                }
+                songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
+                artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
+                genreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
+                songTable.setItems(displayList);
+            }
+
+        });
+
+        byArtist.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO Auto-generated method stub
+                ObservableList<Album> displayList = FXCollections.observableArrayList();
+                Query.init();
+                List<String> listOfID = Query.searchByArtist(searchText.getText().trim());
+                for (String songID : listOfID) {
+                    Query.init();
+                    String songName = Query.findSongNamebyID(songID);
+                    Query.init();
+                    String artistName = Query.findArtistNamebyID(songID);
+                    Query.init();
+                    String genre = Query.findGenrebyID(songID);
+                    displayList.add(new Album(songName, artistName, genre, songID));
+                }
+                songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
+                artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
+                genreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
+                songTable.setItems(displayList);
+            }
+
+        });
+
+        byGenre.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO Auto-generated method stub
+                ObservableList<Album> displayList = FXCollections.observableArrayList();
+                Query.init();
+                List<String> listOfID = Query.searchByGenre(searchText.getText().trim());
+                for (String songID : listOfID) {
+                    Query.init();
+                    String songName = Query.findSongNamebyID(songID);
+                    Query.init();
+                    String artistName = Query.findArtistNamebyID(songID);
+                    Query.init();
+                    String genre = Query.findGenrebyID(songID);
+                    displayList.add(new Album(songName, artistName, genre, songID));
                 }
                 songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
                 artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
