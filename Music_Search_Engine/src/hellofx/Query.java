@@ -188,7 +188,7 @@ public class Query {
         return info;
     }
 
-    public static String getSongName(int songID) {
+    public static String findSongNamebyID(int songID) {
         String songName = "";
         String sql = "select S.songName from Songs S where S.songID = ?";
 
@@ -207,6 +207,48 @@ public class Query {
             e.printStackTrace();
         }
         return songName;
+    }
+
+    public static String findArtistNamebyID(int songID) {
+        String artistName = "";
+        String sql = "select A.artistName from Artists A, Songs S where S.artistID = A.artistID and S.songID = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setInt(1, songID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+                artistName = rs.getString("artistName");
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return artistName;
+    }
+
+    public static String findGenrebyID(int songID) {
+        String genre = "";
+        String sql = "select G.name from Genres G, Songs S where G.genreID = S.genreID and S.songID = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setInt(1, songID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+            genre = rs.getString("name");
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return genre;
     }
 
     public static List<String> getFavoriteSongs(String email) {
