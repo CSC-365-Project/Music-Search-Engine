@@ -231,8 +231,9 @@ public class Query {
         return songNames;
     }
 
-    public static int searchByName(String songName) {
-        int songID = 0;
+    // return a list of song IDs with the same name
+    public static List<Integer> searchByName(String songName) {
+        List<Integer> songIDs = new ArrayList<Integer>();
         String sql = "select S.songID from Songs S where S.songName = ?";
 
         PreparedStatement statement;
@@ -240,8 +241,11 @@ public class Query {
             statement = connect.prepareStatement(sql);
             statement.setString(1, songName);
             ResultSet rs = statement.executeQuery();
-            if (rs.next())
-                songID = rs.getInt("songID");
+
+            while (rs.next()) {
+                int songID = rs.getInt("songID");
+                songIDs.add(songID);
+            }
 
             statement.close();
             connect.close();
@@ -249,7 +253,7 @@ public class Query {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return songID;
+        return songIDs;
     }
 
     public static List<Integer> searchByArtist(String artistName) {
