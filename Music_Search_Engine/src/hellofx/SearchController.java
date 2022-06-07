@@ -26,6 +26,12 @@ public class SearchController {
     private TextField searchText;
     @FXML
     private Button searchButton;
+    @FXML
+    private Button byName;
+    @FXML
+    private Button byArtist;
+    @FXML
+    private Button byGenre;
     private String email;
 
     public void initData(String searchText, String email) {
@@ -64,7 +70,6 @@ public class SearchController {
                 }
 
             }
-
         });
 
         searchButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -78,7 +83,20 @@ public class SearchController {
                     e.printStackTrace();
                 }
             }
-
         });
+
+        byName.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO Auto-generated method stub
+                songList.getItems().clear();
+                Query.init();
+                Query.searchByName(searchText.getText().toLowerCase().trim());
+                
+            }
+            
+        });
+
     }
 }
