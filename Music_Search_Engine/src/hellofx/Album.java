@@ -1,5 +1,7 @@
 package hellofx;
 
+import javafx.scene.control.Button;
+
 public class Album {
     private String songName;
     private String artistName;
