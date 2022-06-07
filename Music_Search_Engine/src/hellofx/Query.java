@@ -363,7 +363,7 @@ public class Query {
 
     public static List<String> searchByGenre(String genreName) {
         List<String> songIDs = new ArrayList<String>();
-        String sql = "select G.genreID from Genres G, Songs S where G.genreID = S.genreName and G.name = ?";
+        String sql = "select S.songID from Genres G, Songs S where G.genreID = S.genreName and G.name = ?";
 
         PreparedStatement statement;
         try {
