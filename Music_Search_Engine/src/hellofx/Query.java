@@ -18,6 +18,45 @@ public class Query {
         connect = Connector.connectdb(info.get(0), info.get(1), info.get(2));
     }
 
+    // // Sample query to return all song in the Song table
+    // public static List<List<String>> getAllSong() {
+    // // sample query
+    // List<List<String>> res = new ArrayList<>();
+
+    // String sql = "select * from Songs;";
+    // Statement statement;
+    // try {
+    // statement = connect.createStatement();
+    // ResultSet rs = statement.executeQuery(sql);
+
+    // // sample printing
+    // while (rs.next()) {
+    // String songName = rs.getString("songName");
+    // String url = rs.getString("url");
+    // String popularity = rs.getString("popularity");
+    // String duration = rs.getString("duration");
+    // String date = rs.getString("publishDate");
+
+    // List<String> info = new ArrayList<>();
+
+    // info.add(songName);
+    // info.add(url);
+    // info.add(popularity);
+    // info.add(duration);
+    // info.add(date);
+    // res.add(info);
+    // }
+
+    // statement.close();
+    // connect.commit();
+    // connect.close();
+
+    // } catch (SQLException e) {
+    // e.printStackTrace();
+    // }
+    // return res;
+    // }
+
     // Sample query to return all song in the Song table
     public static List<List<String>> getAllSong() {
         // sample query
@@ -28,7 +67,6 @@ public class Query {
         try {
             statement = connect.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
-
             // sample printing
             while (rs.next()) {
                 String songID = rs.getString("songID");
@@ -233,7 +271,7 @@ public class Query {
 
     public static String findGenrebyID(String songID) {
         String genre = "";
-        String sql = "select G.name from Genres G, Songs S where G.genreID = S.genreID and S.songID = ?";
+        String sql = "select G.name from Genres G, Songs S where G.genreID = S.genreName and S.songID = ?";
 
         PreparedStatement statement;
         try {
@@ -241,7 +279,7 @@ public class Query {
             statement.setString(1, songID);
             ResultSet rs = statement.executeQuery();
             if (rs.next())
-            genre = rs.getString("name");
+                genre = rs.getString("name");
 
             statement.close();
             connect.close();

@@ -34,7 +34,8 @@ public class LogInController {
             public void handle(ActionEvent event) {
                 try {
                     if (!email_in.getText().trim().isEmpty() && !pass_in.getText().trim().isEmpty()) {
-                        LoginUtil.changeScene(event, "home.fxml", "Home Page", email_in, pass_in);
+                        LoginUtil.changeScene(event, "home.fxml", "Home Page", email_in.getText().trim()
+                        , pass_in.getText().trim(),null);
                     } else {
                         Alert a = new Alert(AlertType.WARNING);
                         a.setTitle("Alert");
@@ -52,7 +53,7 @@ public class LogInController {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    LoginUtil.changeScene(event, "signUp.fxml", "Sign Up", null, null);
+                    LoginUtil.changeScene(event, "signUp.fxml", "Sign Up", null, null,null);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
