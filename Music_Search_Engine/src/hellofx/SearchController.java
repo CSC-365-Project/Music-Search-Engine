@@ -65,7 +65,9 @@ public class SearchController {
                 String artistName = Query.findArtistNamebyID(songID);
                 Query.init();
                 String genre = Query.findGenrebyID(songID);
-                displayList.add(new Album(songName, artistName, genre, songID));
+                Query.init();
+                String url = Query.getURL(songID);
+                displayList.add(new Album(songName, artistName, genre, songID, url));
             }
         } else {
             Query.init();
@@ -77,7 +79,9 @@ public class SearchController {
                 String artistName = Query.findArtistNamebyID(songID);
                 Query.init();
                 String genre = Query.findGenrebyID(songID);
-                displayList.add(new Album(songName, artistName, genre, songID));
+                Query.init();
+                String url = Query.getURL(songID);
+                displayList.add(new Album(songName, artistName, genre, songID, url));
             }
         }
         songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
@@ -167,7 +171,9 @@ public class SearchController {
                     String artistName = Query.findArtistNamebyID(songID);
                     Query.init();
                     String genre = Query.findGenrebyID(songID);
-                    displayList.add(new Album(songName, artistName, genre, songID));
+                    Query.init();
+                    String url = Query.getURL(songID);
+                    displayList.add(new Album(songName, artistName, genre, songID, url));
                 }
                 songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
                 artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
@@ -191,7 +197,10 @@ public class SearchController {
                     String artistName = Query.findArtistNamebyID(songID);
                     Query.init();
                     String genre = Query.findGenrebyID(songID);
-                    displayList.add(new Album(songName, artistName, genre, songID));
+                    Query.init();
+                    String url = Query.getURL(songID);
+
+                    displayList.add(new Album(songName, artistName, genre, songID, url));
                 }
                 songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
                 artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
@@ -216,7 +225,9 @@ public class SearchController {
                     String artistName = Query.findArtistNamebyID(songID);
                     Query.init();
                     String genre = Query.findGenrebyID(songID);
-                    displayList.add(new Album(songName, artistName, genre, songID));
+                    Query.init();
+                    String url = Query.getURL(songID);
+                    displayList.add(new Album(songName, artistName, genre, songID, url));
                 }
                 songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
                 artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));

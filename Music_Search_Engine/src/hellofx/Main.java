@@ -23,16 +23,16 @@ public class Main extends Application {
         primaryStage.setTitle("Music Search Engine");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
-        Media media = new Media("https://p.scdn.co/mp3-preview/0b61b7c36bd426086481769a4bb2e08cc417a01b?cid=75b3100d240d48928aac802662420b21");
-        MediaPlayer player = new MediaPlayer(media); 
-        player.play();
+        // Media media = new Media(
+        // "https://p.scdn.co/mp3-preview/0b61b7c36bd426086481769a4bb2e08cc417a01b?cid=75b3100d240d48928aac802662420b21");
+        // MediaPlayer player = new MediaPlayer(media);
+        // player.play();
     }
 
     public static void main(String[] args) throws Exception {
 
         Query.init();
 
-        
         launch(args);
     }
 }

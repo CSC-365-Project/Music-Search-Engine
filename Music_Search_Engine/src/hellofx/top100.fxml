@@ -16,10 +16,11 @@
       </Text>
       <TableView fx:id="top100SongTable" layoutX="48.0" layoutY="86.0" prefHeight="299.0" prefWidth="502.0">
          <columns>
-            <TableColumn fx:id="top100songNameColumn" prefWidth="140.0" text="Song Name" />
-            <TableColumn fx:id="top100ArtistColumn" prefWidth="154.4000244140625" text="Artist Name" />
-            <TableColumn fx:id="top100GenreColumn" prefWidth="154.4000244140625" text="Genre" />
-            <TableColumn fx:id="top100AddButton" prefWidth="50.4000244140625" text="Add" />
+            <TableColumn fx:id="top100songNameColumn" prefWidth="120.0" text="Song Name" />
+            <TableColumn fx:id="top100ArtistColumn" prefWidth="92.800048828125" text="Artist Name" />
+            <TableColumn fx:id="top100GenreColumn" prefWidth="59.99993896484375" text="Genre" />
+            <TableColumn fx:id="top100AddButton" prefWidth="40.79998779296875" text="Add" />
+            <TableColumn fx:id="URLColumn" prefWidth="187.19998779296873" text="URL" />
          </columns>
       </TableView>
       <Button fx:id="backButton" layoutX="49.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="32.0" text="&lt;" />
