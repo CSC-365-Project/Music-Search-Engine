@@ -430,15 +430,14 @@ public class Query {
         }
     }
 
-    // need to be tested!
     public static void addToFavList(String songID, String userEmail) {
-        String sql = "insert into Favorite(songID, userEmail) values(?, ?)";
+        String sql = "insert into Favorite(userEmail, songID)values(?,?);";
 
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
-            statement.setString(1, songID);
-            statement.setString(2, userEmail);
+            statement.setString(1, userEmail);
+            statement.setString(2, songID);
 
             statement.executeUpdate();
 
@@ -636,6 +635,27 @@ public class Query {
             e.printStackTrace();
         }
         return res;
+    }
+
+    public static String getURL(String songID) {
+        String url = "";
+        String sql = "SELECT S.url FROM Songs S WHERE S.songID = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, songID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+                url = rs.getString("url");
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return url;
     }
 
 }
