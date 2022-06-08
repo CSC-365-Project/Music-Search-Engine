@@ -433,15 +433,14 @@ public class Query {
         }
     }
 
-    // need to be tested!
     public static void addToFavList(String songID, String userEmail) {
-        String sql = "insert into Favorite(songID, userEmail) values(?, ?)";
+        String sql = "insert into Favorite(userEmail, songID)values(?,?);";
 
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
-            statement.setString(1, songID);
-            statement.setString(2, userEmail);
+            statement.setString(1, userEmail);
+            statement.setString(2, songID);
 
             statement.executeUpdate();
 
