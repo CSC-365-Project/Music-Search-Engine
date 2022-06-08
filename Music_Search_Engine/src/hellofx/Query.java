@@ -268,7 +268,7 @@ public class Query {
 
     public static String findGenrebyID(String songID) {
         String genre = "";
-        String sql = "select G.name from Genres G, Songs S where G.genreID = S.genreName and S.songID = ?";
+        String sql = "select genreName from Songs where songID = ?";
 
         PreparedStatement statement;
         try {
@@ -276,7 +276,7 @@ public class Query {
             statement.setString(1, songID);
             ResultSet rs = statement.executeQuery();
             if (rs.next())
-                genre = rs.getString("name");
+                genre = rs.getString("genreName");
 
             statement.close();
             connect.close();
