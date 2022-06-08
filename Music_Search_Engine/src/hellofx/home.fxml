@@ -13,8 +13,11 @@
             <Font size="46.0" />
          </font>
       </Text>
-      <Text fx:id="user_name" layoutX="88.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text fx:id="user_name" layoutX="289.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <TextField fx:id="searchText" layoutX="88.0" layoutY="27.0" prefHeight="26.0" prefWidth="380.0" promptText="search" />
       <Button fx:id="searchButton" layoutX="468.0" layoutY="27.0" mnemonicParsing="false" text="Search" />
+      <Button layoutX="207.0" layoutY="175.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="185.0" text="My Favorite" />
+      <Button layoutX="99.0" layoutY="305.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="138.0" text="Top 100 of the Week" />
+      <Button layoutX="356.0" layoutY="305.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="138.0" text="What's New!" />
    </children>
 </AnchorPane>
