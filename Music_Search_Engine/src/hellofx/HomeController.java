@@ -22,6 +22,8 @@ public class HomeController {
     @FXML
     private Button top100Button;
     @FXML
+    private Button newlyReleasedButton;
+    @FXML
     private Button newButton;
 
     private String email;
@@ -54,6 +56,20 @@ public class HomeController {
                 try {
                     System.out.println("In set up button");
                     LoginUtil.changeSceneTop100(event, "top100.fxml", "Top 100", email);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+
+        newlyReleasedButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO Auto-generated method stub
+                try {
+                    LoginUtil.changeSceneNewlyReleased(event, "newlyReleased.fxml", "What's New", email);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -360,7 +360,7 @@ public class Query {
 
     public static List<String> searchByGenre(String genreName) {
         List<String> songIDs = new ArrayList<String>();
-        String sql = "select S.songID from Genres G, Songs S where G.genreID = S.genreName and G.name = ?";
+        String sql = "select songID from Songs where genreName = ? limit 10";
 
         PreparedStatement statement;
         try {
@@ -565,7 +565,7 @@ public class Query {
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-7'";
+        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-8'";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
@@ -573,6 +573,7 @@ public class Query {
 
             // sample printing
             while (rs.next()) {
+                String songID = rs.getString("songID");
                 String songName = rs.getString("songName");
                 String url = rs.getString("url");
                 String popularity = rs.getString("popularity");
@@ -580,6 +581,7 @@ public class Query {
                 String date = rs.getString("publishDate");
 
                 List<String> info = new ArrayList<>();
+                info.add(songID);
                 info.add(songName);
                 info.add(url);
                 info.add(popularity);
