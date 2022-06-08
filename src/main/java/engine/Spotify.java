@@ -40,51 +40,80 @@ public class Spotify {
 //    }
 
 
-    public static void getPlaylistsItems_Sync(String playlistId) {
+    public static void insertPlaylisttoDB(String playlistId, int count) {
         try {
             GetPlaylistsItemsRequest getPlaylistsItemsRequest = spotifyApi
                     .getPlaylistsItems(playlistId)
 //          .fields("description")
 //          .limit(10)
-//          .offset(0)
+            .offset(count)
 //          .market(CountryCode.SE)
 //          .additionalTypes("track,episode")
                     .build();
+
             final Paging<PlaylistTrack> playlistTrackPaging = getPlaylistsItemsRequest.execute();
             Query.init();
-            for (int i = 2; i < 7; i++) {
+            int n = playlistTrackPaging.getTotal();
+            if (n > 100){
+                n = 100;
+            }
+
+            for (int i = 0; i < n; i++) {
+                System.out.println("Song: " + (count+i+1));
                 String songId = playlistTrackPaging.getItems()[i].getTrack().getId();
                 String songName = playlistTrackPaging.getItems()[i].getTrack().getName();
-                String url = "https://open.spotify.com/track/" + (playlistTrackPaging.getItems()[i].getTrack()).getId();
+                if(songName.length() > 50){
+                    songName = songName.substring(0,50);
+                }
+                String TrackInfo = String.valueOf(playlistTrackPaging.getItems()[i].getTrack());
+                String previewUrl = TrackInfo.substring(TrackInfo.indexOf("previewUrl=")+11, TrackInfo.indexOf(", trackNumber="));
+                if (previewUrl.length() == 4){
+                    previewUrl = "https://open.spotify.com/track/" + songId;
+                }
                 String popularity = String.valueOf(((Track)playlistTrackPaging.getItems()[i].getTrack()).getPopularity());
                 String durationMS = String.valueOf(((Track)playlistTrackPaging.getItems()[i].getTrack()).getDurationMs());
                 String publishDate = ((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getReleaseDate();
                 if (((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getReleaseDatePrecision().toString().equals("YEAR")){
                     publishDate = publishDate + "-01-01";
                 }
+                System.out.println(songId);
 
                 String artistId = ((Track) playlistTrackPaging.getItems()[i].getTrack()).getArtists()[0].getId();
-
-                String albumName = ((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getName();
-                String albumId = ((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getId();
+                String genres = GetArtist.getArtistGenresById(artistId);
 
                 String artistName = GetArtist.getArtistNameById(artistId);
-                String genres = GetArtist.getArtistGenresById(artistId);
                 String followers = GetArtist.getArtistFollowersById(artistId);
-                String type = GetArtist.getArtistTypeById(artistId);
+                String artistUrl = GetArtist.getArtistExternalUrl(artistId);
 
-                List<String> songInfo = Arrays.asList(songId, songName, url, popularity, durationMS, publishDate, artistId, albumId, genres);
-                Query.insertSong(songInfo);
+                String albumId = ((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getId();
+                String albumName = GetAlbum.getAlbumName(albumId);
+
+                List<String> songInfo = Arrays.asList(songId, songName, previewUrl, popularity, durationMS, publishDate, albumId, artistId, genres);
+                List<String> artistInfo = Arrays.asList(artistId, artistName, followers, artistUrl);
+                List<String> albumInfo = Arrays.asList(albumId, albumName, artistId, publishDate);
+
+                try{
+                    Query.insertSong(songInfo);
+                }catch(Exception ignored){
+                }
+                try {
+                    Query.insertArtist(artistInfo);
+                }catch(Exception ignored){
+                }
+                try {
+                    Query.insertAlbum(albumInfo);
+                }catch(Exception ignored){
+                }
             }
             Query.close();
-        } catch (IOException | SpotifyWebApiException | ParseException e) {
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
     public static void main(String[] args) {
-        getPlaylistsItems_Sync("37i9dQZEVXbMDoHDwVN2tF");
+        for (int i=0 ; i < 1; i++) {
+            insertPlaylisttoDB("5K1cbxrWNFll24KfK0NWQw", i*100);
+        }
     }
 }

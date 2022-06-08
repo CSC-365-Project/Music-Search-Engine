@@ -5,6 +5,7 @@ module engine.music {
     requires java.desktop;
     requires org.apache.httpcomponents.core5.httpcore5;
     requires se.michaelthelin.spotify;
+    requires javafx.media;
 
 
     opens hellofx to javafx.fxml;

@@ -36,8 +36,9 @@ public class GetArtist {
             GetArtistRequest getArtistRequest = spotifyApi.getArtist(ArtistId)
                     .build();
             Artist artist = getArtistRequest.execute();
-
-            return artist.getGenres()[0];
+            if (artist.getGenres().length != 0){
+                return artist.getGenres()[0];
+            }
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -64,6 +65,19 @@ public class GetArtist {
             Artist artist = getArtistRequest.execute();
 
             return artist.getType().toString();
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return "";
+    }
+
+    public static String getArtistExternalUrl(String ArtistId){
+        try {
+            GetArtistRequest getArtistRequest = spotifyApi.getArtist(ArtistId)
+                    .build();
+            Artist artist = getArtistRequest.execute();
+
+            return "https://open.spotify.com/artist/" + artist.getId();
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
         }

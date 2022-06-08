@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Main extends Application {
 
@@ -19,6 +21,10 @@ public class Main extends Application {
         primaryStage.setTitle("Music Search Engine");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
+        Media media = new Media("https://p.scdn.co/mp3-preview/b362f060e5b9261aca193c58e694b1f097d2cd41?cid=75b3100d240d48928aac802662420b21");; //replace /Movies/test.mp3 with your file
+        MediaPlayer player = new MediaPlayer(media);
+        player.play();
+
     }
 
     public static void main(String[] args) throws Exception {
@@ -30,7 +36,6 @@ public class Main extends Application {
         // for(int i = 0; i<res.size(); i++){
         //     System.out.print(res.get(i));
         // }
-        Query.createFavoriteList("somename", "12341@gmail.com");
         launch(args);
     }
 }

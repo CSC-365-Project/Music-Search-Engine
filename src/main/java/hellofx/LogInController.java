@@ -1,4 +1,3 @@
-
 package hellofx;
 
 import java.io.IOException;

@@ -16,19 +16,20 @@ public class GetAlbum {
             .setAccessToken(accessToken)
             .build();
 
-    public static void getAlbum_Sync(String id) {
+    public static String getAlbumName(String id) {
         try {
             GetAlbumRequest getAlbumRequest = spotifyApi.getAlbum(id)
 //          .market(CountryCode.SE)
                     .build();
             final Album album = getAlbumRequest.execute();
 
-            System.out.println("Name: " + album.getTracks());
-            System.out.println("Genres: " + Arrays.toString(album.getGenres()));
+            return album.getName();
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
         }
+        return "";
     }
+}
 
     //                String AlbumInfo = Arrays.toString(((Track) playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getArtists());
 //                String AlbumName = AlbumInfo.substring(AlbumInfo.indexOf("=")+1,
@@ -37,4 +38,3 @@ public class GetAlbum {
 //                        AlbumInfo.indexOf(",", AlbumInfo.indexOf("id=")+1));
 //                System.out.println("Album's name: " + AlbumName);
 //                System.out.println("Album's id: " + AlbumInfo);
-}

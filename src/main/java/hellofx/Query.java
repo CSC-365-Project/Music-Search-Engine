@@ -560,7 +560,41 @@ public class Query {
             System.out.println("Records inserted");
             stmt.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: " + e);
+        }
+    }
+
+    public static void insertArtist(List<String> Info) {
+        String sql = "insert into Artists(artistID, artistName, follower, description) values(?, ?, ?, ?);";
+        PreparedStatement stmt = null;
+        try {
+            stmt = connect.prepareStatement(sql);
+            stmt.setString(1, Info.get(0));
+            stmt.setString(2, Info.get(1));
+            stmt.setInt(3, Integer.parseInt(Info.get(2)));
+            stmt.setString(4, Info.get(3));
+            stmt.executeUpdate();
+            System.out.println("Artist inserted");
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+    }
+    public static void insertAlbum(List<String> Info) {
+        String sql = "insert into Albums(albumID, albumName, artistID, publishDate) " +
+                "values(?, ?, ?, ?);";
+        PreparedStatement stmt = null;
+        try {
+            stmt = connect.prepareStatement(sql);
+            stmt.setString(1, Info.get(0));
+            stmt.setString(2, Info.get(1));
+            stmt.setString(3, Info.get(2));
+            stmt.setDate(4, Date.valueOf(Info.get(3)));
+            stmt.executeUpdate();
+            System.out.println("Album inserted");
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
         }
     }
 }

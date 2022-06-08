@@ -1,9 +1,13 @@
 package engine;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
+import se.michaelthelin.spotify.model_objects.miscellaneous.AudioAnalysis;
 import se.michaelthelin.spotify.model_objects.specification.Episode;
+import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.requests.data.episodes.GetEpisodeRequest;
 import org.apache.hc.core5.http.ParseException;
+import se.michaelthelin.spotify.requests.data.tracks.GetAudioAnalysisForTrackRequest;
+import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
 
 import java.io.IOException;
 
@@ -14,14 +18,15 @@ public class GetSong {
             .setAccessToken(accessToken)
             .build();
 
-    public static void getEpisode_Sync(String id) {
+    public static void getSong_Sync(String id) {
         try {
-            GetEpisodeRequest getEpisodeRequest = spotifyApi.getEpisode(id)
+            GetTrackRequest getTrackRequest = spotifyApi.getTrack(id)
 //          .market(CountryCode.SE)
                     .build();
-            final Episode episode = getEpisodeRequest.execute();
 
-            System.out.println("Name: " + episode.getName());
+
+            Track track = getTrackRequest.execute();
+            System.out.println("Track duration: " + track.getPopularity());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
         }
