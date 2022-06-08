@@ -17,6 +17,12 @@ public class HomeController {
     private TextField searchText;
     @FXML
     private Button searchButton;
+    @FXML
+    private Button favoriteButton;
+    @FXML
+    private Button top100Button;
+    @FXML
+    private Button newButton;
 
     private String email;
 
@@ -34,6 +40,20 @@ public class HomeController {
                 // TODO Auto-generated method stub
                 try {
                     LoginUtil.changeScene(event, "search.fxml", "Search", email, null, searchText.getText().trim());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        top100Button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO Auto-generated method stub
+                try {
+                    System.out.println("In set up button");
+                    LoginUtil.changeSceneTop100(event, "top100.fxml", "Top 100", email);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -35,7 +35,7 @@ public class SearchController {
     @FXML
     private TableColumn<Album, String> genreColumn;
     @FXML
-    TableColumn<Album, Void> addButton;
+    private TableColumn<Album, Void> addButton;
     @FXML
     private Button backButton;
     @FXML
@@ -54,6 +54,7 @@ public class SearchController {
         Query.init();
         this.email = email;
         List<List<String>> lst = Query.getAllSong();
+        FXCollections.observableArrayList().clear();
         ObservableList<Album> displayList = FXCollections.observableArrayList();
         if (searchText.equals("")) {
             for (List<String> list : lst) {
@@ -78,14 +79,6 @@ public class SearchController {
                 String genre = Query.findGenrebyID(songID);
                 displayList.add(new Album(songName, artistName, genre, songID));
             }
-
-            // List<String> searchArray = Arrays.asList(searchText.split(" "));
-            // for (List<String> list : lst) {
-            // List<String> filteredList = list.stream().filter(input -> {
-            // return searchArray.stream().allMatch(word ->
-            // input.toLowerCase().contains(word.toLowerCase()));
-            // }).collect(Collectors.toList());
-            // songList.getItems().addAll(filteredList);
         }
         songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
         artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
@@ -100,7 +93,7 @@ public class SearchController {
             public TableCell<Album, Void> call(final TableColumn<Album, Void> param) {
                 final TableCell<Album, Void> cell = new TableCell<Album, Void>() {
 
-                    private final Button btn = new Button("+");
+                    private final Button btn = new Button("Add");
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Album data = getTableView().getItems().get(getIndex());
@@ -127,7 +120,7 @@ public class SearchController {
 
         addButton.setCellFactory(cellFactory);
 
-        songTable.getColumns().add(addButton);
+        // songTable.getColumns().add(addButton);
 
     }
 

@@ -23,47 +23,52 @@ import javafx.util.Callback;
 
 public class Top100Controller {
     @FXML
-    private TableView<Album> songTable;
+    private TableView<Album> top100SongTable;
     @FXML
-    private TableColumn<Album, String> songNameColumn;
+    private TableColumn<Album, String> top100songNameColumn;
     @FXML
-    private TableColumn<Album, String> artistColumn;
+    private TableColumn<Album, String> top100ArtistColumn;
     @FXML
-    private TableColumn<Album, String> genreColumn;
+    private TableColumn<Album, String> top100GenreColumn;
     @FXML
-    TableColumn<Album, Void> addButton;
+    private TableColumn<Album, Void> top100AddButton;
     @FXML
     private Button backButton;
     private String email;
 
-    public void initData(String searchText, String email) {
+    public void initData(String email) {
         Query.init();
         this.email = email;
         List<List<String>> lst = Query.getRecentPopularSong();
         ObservableList<Album> displayList = FXCollections.observableArrayList();
+
         for (List<String> list : lst) {
+            // print out the items in the list lst
+            System.out.println(list.get(0) + " " + list.get(1) + " " + list.get(2));
+
             String songID = list.get(0);
+            System.out.println(songID);
             Query.init();
             String songName = Query.findSongNamebyID(songID);
             Query.init();
             String artistName = Query.findArtistNamebyID(songID);
             Query.init();
             String genre = Query.findGenrebyID(songID);
+            System.out.println(songName);
             displayList.add(new Album(songName, artistName, genre, songID));
         }
-        songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
-        artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
-        genreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
-        songTable.setItems(displayList);
+        top100songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
+        top100ArtistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
+        top100GenreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
+        top100SongTable.setItems(displayList);
         addButtonToTable();
     }
 
     private void addButtonToTable() {
-        Callback<TableColumn<Album, Void>, TableCell<Album, Void>> cellFactory = new Callback<TableColumn<Album, Void>, TableCell<Album, Void>>() {
+        Callback<TableColumn<Album, Void>, TableCell<Album, Void>> cellFactory2 = new Callback<TableColumn<Album, Void>, TableCell<Album, Void>>() {
             @Override
             public TableCell<Album, Void> call(final TableColumn<Album, Void> param) {
                 final TableCell<Album, Void> cell = new TableCell<Album, Void>() {
-
                     private final Button btn = new Button("+");
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -89,9 +94,9 @@ public class Top100Controller {
             }
         };
 
-        addButton.setCellFactory(cellFactory);
+        top100AddButton.setCellFactory(cellFactory2);
 
-        songTable.getColumns().add(addButton);
+        top100SongTable.getColumns().add(top100AddButton);
 
     }
 
