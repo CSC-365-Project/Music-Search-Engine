@@ -638,4 +638,25 @@ public class Query {
         return res;
     }
 
+    public static String getURL(String songID) {
+        String url = "";
+        String sql = "SELECT S.url FROM Songs S WHERE S.songID = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, songID);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+                url = rs.getString("url");
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
 }
