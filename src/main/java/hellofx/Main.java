@@ -21,9 +21,9 @@ public class Main extends Application {
         primaryStage.setTitle("Music Search Engine");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
-        Media media = new Media("https://p.scdn.co/mp3-preview/b362f060e5b9261aca193c58e694b1f097d2cd41?cid=75b3100d240d48928aac802662420b21");; //replace /Movies/test.mp3 with your file
-        MediaPlayer player = new MediaPlayer(media);
-        player.play();
+//        Media media = new Media("https://p.scdn.co/mp3-preview/b362f060e5b9261aca193c58e694b1f097d2cd41?cid=75b3100d240d48928aac802662420b21");; //replace /Movies/test.mp3 with your file
+//        MediaPlayer player = new MediaPlayer(media);
+//        player.play();
 
     }
 

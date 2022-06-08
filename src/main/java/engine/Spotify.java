@@ -76,7 +76,6 @@ public class Spotify {
                 if (((Track)playlistTrackPaging.getItems()[i].getTrack()).getAlbum().getReleaseDatePrecision().toString().equals("YEAR")){
                     publishDate = publishDate + "-01-01";
                 }
-                System.out.println(songId);
 
                 String artistId = ((Track) playlistTrackPaging.getItems()[i].getTrack()).getArtists()[0].getId();
                 String genres = GetArtist.getArtistGenresById(artistId);
@@ -112,8 +111,11 @@ public class Spotify {
     }
 
     public static void main(String[] args) {
-        for (int i=0 ; i < 1; i++) {
-            insertPlaylisttoDB("5K1cbxrWNFll24KfK0NWQw", i*100);
+        for (int i=0 ; i < 14; i++) {
+            insertPlaylisttoDB("1ejRUZcod8DSFqsW5WIkmm", i*100);
         }
+//        for (int i=0 ; i < 15; i++) {
+//            insertPlaylisttoDB("6FMls6rmInujNCikuWcuEk", i*100);
+//        }
     }
 }
