@@ -13,11 +13,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import javafx.scene.control.ListView;
 
 import java.util.stream.Collector;
@@ -32,6 +34,8 @@ public class SearchController {
     private TableColumn<Album, String> artistColumn;
     @FXML
     private TableColumn<Album, String> genreColumn;
+    @FXML
+    private TableColumn<Album, Void> addButton;
     @FXML
     private Button backButton;
     @FXML
@@ -50,6 +54,7 @@ public class SearchController {
         Query.init();
         this.email = email;
         List<List<String>> lst = Query.getAllSong();
+        FXCollections.observableArrayList().clear();
         ObservableList<Album> displayList = FXCollections.observableArrayList();
         if (searchText.equals("")) {
             for (List<String> list : lst) {
@@ -74,19 +79,49 @@ public class SearchController {
                 String genre = Query.findGenrebyID(songID);
                 displayList.add(new Album(songName, artistName, genre, songID));
             }
-
-            // List<String> searchArray = Arrays.asList(searchText.split(" "));
-            // for (List<String> list : lst) {
-            // List<String> filteredList = list.stream().filter(input -> {
-            // return searchArray.stream().allMatch(word ->
-            // input.toLowerCase().contains(word.toLowerCase()));
-            // }).collect(Collectors.toList());
-            // songList.getItems().addAll(filteredList);
         }
         songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
         artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
         genreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
         songTable.setItems(displayList);
+        addButtonToTable();
+    }
+
+    private void addButtonToTable() {
+        Callback<TableColumn<Album, Void>, TableCell<Album, Void>> cellFactory = new Callback<TableColumn<Album, Void>, TableCell<Album, Void>>() {
+            @Override
+            public TableCell<Album, Void> call(final TableColumn<Album, Void> param) {
+                final TableCell<Album, Void> cell = new TableCell<Album, Void>() {
+
+                    private final Button btn = new Button("Add");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Album data = getTableView().getItems().get(getIndex());
+                            Query.init();
+                            String songId = data.getSongID();
+
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+
+                };
+                return cell;
+            }
+        };
+
+        addButton.setCellFactory(cellFactory);
+
+        // songTable.getColumns().add(addButton);
+
     }
 
     public void initialize() {

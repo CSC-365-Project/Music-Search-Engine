@@ -96,12 +96,9 @@ public class Query {
     }
 
     public static String getPassword(String email) {
-
         String password = "";
         String sql = "select U.pwd from Users U where U.email = ?";
-
         PreparedStatement statement;
-
         try {
             statement = connect.prepareStatement(sql);
             statement.setString(1, email);
@@ -614,6 +611,7 @@ public class Query {
 
             // sample printing
             while (rs.next()) {
+                String songID = rs.getString("songID");
                 String songName = rs.getString("songName");
                 String url = rs.getString("url");
                 String popularity = rs.getString("popularity");
@@ -621,6 +619,7 @@ public class Query {
                 String date = rs.getString("publishDate");
 
                 List<String> info = new ArrayList<>();
+                info.add(songID);
                 info.add(songName);
                 info.add(url);
                 info.add(popularity);
