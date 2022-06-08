@@ -433,6 +433,27 @@ public class Query {
         }
     }
 
+    // need to be tested!
+    public static void addToFavList(String songID, String userEmail) {
+        String sql = "insert into Favorite(songID, userEmail) values(?, ?)";
+
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, songID);
+            statement.setString(2, userEmail);
+
+            statement.executeUpdate();
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.print("insert success!");
+    }
+
     public static List<String> getSongInAlbums(String albumName) {
         List<String> songNames = new ArrayList<String>();
         String sql = "select S.songName from Songs S, Albums A where S.albumID = A.albumID and A.albumName = ?";
@@ -548,7 +569,7 @@ public class Query {
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2021-3-17' AND '2021-3-21'";
+        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-7'";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
@@ -586,7 +607,7 @@ public class Query {
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String sql = "SELECT * FROM Songs S WHERE publishDate BETWEEN '2021-3-17' AND '2021-3-21'ORDER BY S.popularity DESC LIMIT 3";
+        String sql = "SELECT * FROM Songs S WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-7'ORDER BY S.popularity DESC LIMIT 100";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
