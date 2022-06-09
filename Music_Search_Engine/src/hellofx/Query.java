@@ -659,6 +659,14 @@ public class Query {
         }
         return url;
     }
+    
+    public static int URLCheck(String url){
+        if (url.charAt(8) == 'o'){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 
     public static List<String> getSongDisplayInfo(String songID) {
         // sample query
