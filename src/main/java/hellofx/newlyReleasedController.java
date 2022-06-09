@@ -43,11 +43,7 @@ public class newlyReleasedController {
         ObservableList<Album> displayList = FXCollections.observableArrayList();
 
         for (List<String> list : lst) {
-            // print out the items in the list lst
-            System.out.println(list.get(0) + " " + list.get(1) + " " + list.get(2));
-
             String songID = list.get(0);
-            System.out.println(songID);
             Query.init();
             String songName = Query.findSongNamebyID(songID);
             Query.init();
@@ -103,7 +99,7 @@ public class newlyReleasedController {
 
         newlyReleasedSongAddButton.setCellFactory(cellFactory2);
 
-        newlyReleasedSongTable.getColumns().add(newlyReleasedSongAddButton);
+        //newlyReleasedSongTable.getColumns().add(newlyReleasedSongAddButton);
 
     }
 
