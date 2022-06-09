@@ -48,26 +48,29 @@ public class LoginUtil {
 
     public static void changeSceneTop100(ActionEvent event, String fxmlFile, String title, String email)
             throws IOException {
-        System.out.println("In change scene top 100");
-        System.out.println("s1");
         Parent root = null;
-        System.out.println("s2");
         FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
         root = loader.load();
-        System.out.println("s3");
         Top100Controller controller = loader.getController();
-        System.out.println("s4");
         controller.initData(email);
-        System.out.println("s5");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        System.out.println("s6");
         stage.setTitle(title);
-
-        System.out.println("s7");
         stage.setScene(new Scene(root, 600, 400));
-        System.out.println("s8");
         stage.show();
-        System.out.println("s9");
+    }
+
+    public static void changeSceneInformation(ActionEvent event, String fxmlFile, String title, String email,
+            String songID)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
+        InformationController controller = loader.getController();
+        controller.initData(email, songID);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
     }
 
     public static void signUpUser(ActionEvent event, TextField email, TextField username, TextField password,

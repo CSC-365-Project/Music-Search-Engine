@@ -2,6 +2,8 @@
 package hellofx;
 
 import java.io.IOException;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -41,12 +43,19 @@ public class InformationController {
         Query.init();
         this.email = email;
         this.songID = songID;
-        
+        List<String> infoList = Query.getSongDisplayInfo(songID);
+        songNameText.setText(infoList.get(0));
+        artistNameText.setText(infoList.get(1));
+        albumNameText.setText(infoList.get(2));
+        genreNameText.setText(infoList.get(3));
+        popularityNameText.setText(infoList.get(4));
+        publishDateText.setText(infoList.get(5));
+        artistDesText.setText(infoList.get(6));
+
     }
 
     public void initialize() {
-        addFavButton.setOnAction(new EventHandler<ActionEvent>() {
-
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 // TODO Auto-generated method stub
@@ -58,6 +67,16 @@ public class InformationController {
                     e.printStackTrace();
                 }
 
+            }
+
+        });
+
+        addFavButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO Auto-generated method stub
+                Query.init();
+                Query.addToFavList(songID, email);
             }
 
         });

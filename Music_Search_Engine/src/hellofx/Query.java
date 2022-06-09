@@ -431,7 +431,7 @@ public class Query {
     }
 
     public static void addToFavList(String songID, String userEmail) {
-        String sql = "insert into Favorite(userEmail, songID)values(?,?);";
+        String sql = "insert into Favorite(userEmail, songID)values(?,?)";
 
         PreparedStatement statement;
         try {
@@ -657,7 +657,7 @@ public class Query {
         }
         return url;
     }
-    
+
     public static List<String> getSongDisplayInfo(String songID) {
         // sample query
         List<String> res = new ArrayList<>();
@@ -706,9 +706,10 @@ public class Query {
         }
         return res;
     }
-    
+
     public static void insertSong(List<String> songInfo) {
-        String sql = "insert into Songs(songID, songName, url, popularity, duration, publishDate, albumID, artistID, genreName) " +
+        String sql = "insert into Songs(songID, songName, url, popularity, duration, publishDate, albumID, artistID, genreName) "
+                +
                 "values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
         PreparedStatement stmt = null;
         try {
@@ -746,6 +747,7 @@ public class Query {
             System.out.println("Error: " + e);
         }
     }
+
     public static void insertAlbum(List<String> Info) {
         String sql = "insert into Albums(albumID, albumName, artistID, publishDate) " +
                 "values(?, ?, ?, ?);";

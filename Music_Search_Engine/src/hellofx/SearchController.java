@@ -103,7 +103,13 @@ public class SearchController {
                             Album data = getTableView().getItems().get(getIndex());
                             Query.init();
                             String songId = data.getSongID();
-                            
+                            try {
+                                LoginUtil.changeSceneInformation(event, "information.fxml", "Information Page", email,
+                                        songId);
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
                         });
                     }
 
