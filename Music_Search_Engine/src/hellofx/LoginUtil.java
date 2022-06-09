@@ -46,12 +46,12 @@ public class LoginUtil {
         stage.show();
     }
 
-    public static void changeSceneTop100(ActionEvent event, String fxmlFile, String title, String email)
+    public static void changeSceneTop10(ActionEvent event, String fxmlFile, String title, String email)
             throws IOException {
         Parent root = null;
         FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
         root = loader.load();
-        Top100Controller controller = loader.getController();
+        Top10Controller controller = loader.getController();
         controller.initData(email);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
@@ -80,6 +80,30 @@ public class LoginUtil {
         root = loader.load();
         newlyReleasedController controller = loader.getController();
         controller.initData(email);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
+    public static void changeSceneFavorite(ActionEvent event, String fxmlFile, String title, String email)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
+        FavoriteController controller = loader.getController();
+        controller.initData(email);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
+    public static void changeSceneSearch(ActionEvent event, String fxmlFile, String title, String email)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         stage.setScene(new Scene(root, 600, 400));
