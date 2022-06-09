@@ -49,9 +49,8 @@ public class InformationController {
         albumNameText.setText(infoList.get(2));
         genreNameText.setText(infoList.get(3));
         popularityNameText.setText(infoList.get(4));
-        publishDateText.setText(infoList.get(5));
-        artistDesText.setText(infoList.get(6));
-
+        publishDateText.setText(infoList.get(6));
+        artistDesText.setText(infoList.get(7));
     }
 
     public void initialize() {
@@ -66,9 +65,7 @@ public class InformationController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
-
         });
 
         addFavButton.setOnAction(new EventHandler<ActionEvent>() {
