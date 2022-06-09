@@ -73,6 +73,19 @@ public class LoginUtil {
         stage.show();
     }
 
+    public static void changeSceneNewlyReleased(ActionEvent event, String fxmlFile, String title, String email)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
+        newlyReleasedController controller = loader.getController();
+        controller.initData(email);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
     public static void signUpUser(ActionEvent event, TextField email, TextField username, TextField password,
             TextField password_conf, String fxmlFile) throws IOException {
         Query.init();

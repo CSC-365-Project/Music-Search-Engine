@@ -18,6 +18,7 @@
       <Button fx:id="searchButton" layoutX="468.0" layoutY="27.0" mnemonicParsing="false" text="Search" />
       <Button fx:id="favoriteButton" layoutX="207.0" layoutY="175.0" mnemonicParsing="false" prefHeight="93.0" prefWidth="185.0" text="My Favorite" />
       <Button fx:id="top100Button" layoutX="99.0" layoutY="305.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="138.0" text="Top 100 of the Week" />
-      <Button fx:id="newButton" layoutX="356.0" layoutY="305.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="138.0" text="What's New!" />
+      <Button fx:id="newlyReleasedButton" layoutX="356.0" layoutY="305.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="138.0" text="What's New!" />
+      <Button fx:id="playSongButtom" layoutX="468.0" layoutY="150.0" mnemonicParsing="false" text="Play!" />
    </children>
 </AnchorPane>
