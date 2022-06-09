@@ -54,6 +54,7 @@ public class newlyReleasedController {
             String artistName = Query.findArtistNamebyID(songID);
             Query.init();
             String genre = Query.findGenrebyID(songID);
+            Query.init();
             String url = Query.getURL(songID);
             displayList.add(new Album(songName, artistName, genre, songID, url));
         }
@@ -75,7 +76,13 @@ public class newlyReleasedController {
                             Album data = getTableView().getItems().get(getIndex());
                             Query.init();
                             String songId = data.getSongID();
-
+                            try {
+                                LoginUtil.changeSceneInformation(event, "information.fxml", "Information Page", email,
+                                        songId);
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
                         });
                     }
 

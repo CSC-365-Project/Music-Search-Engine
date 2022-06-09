@@ -22,17 +22,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
-public class Top100Controller {
+public class Top10Controller {
     @FXML
-    private TableView<Album> top100SongTable;
+    private TableView<Album> top10SongTable;
     @FXML
-    private TableColumn<Album, String> top100songNameColumn;
+    private TableColumn<Album, String> top10songNameColumn;
     @FXML
-    private TableColumn<Album, String> top100ArtistColumn;
+    private TableColumn<Album, String> top10ArtistColumn;
     @FXML
-    private TableColumn<Album, String> top100GenreColumn;
+    private TableColumn<Album, String> top10GenreColumn;
     @FXML
-    private TableColumn<Album, Void> top100AddButton;
+    private TableColumn<Album, Void> top10AddButton;
     @FXML
     private Button backButton;
     private String email;
@@ -44,11 +44,7 @@ public class Top100Controller {
         ObservableList<Album> displayList = FXCollections.observableArrayList();
 
         for (List<String> list : lst) {
-            // print out the items in the list lst
-            System.out.println(list.get(0) + " " + list.get(1) + " " + list.get(2));
-
             String songID = list.get(0);
-            System.out.println(songID);
             Query.init();
             String songName = Query.findSongNamebyID(songID);
             Query.init();
@@ -59,10 +55,10 @@ public class Top100Controller {
             String url = Query.getURL(songID);
             displayList.add(new Album(songName, artistName, genre, songID, url));
         }
-        top100songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
-        top100ArtistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
-        top100GenreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
-        top100SongTable.setItems(displayList);
+        top10songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
+        top10ArtistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
+        top10GenreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
+        top10SongTable.setItems(displayList);
         addButtonToTable();
     }
 
@@ -77,7 +73,13 @@ public class Top100Controller {
                             Album data = getTableView().getItems().get(getIndex());
                             Query.init();
                             String songId = data.getSongID();
-
+                            try {
+                                LoginUtil.changeSceneInformation(event, "information.fxml", "Information Page", email,
+                                        songId);
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
                         });
                     }
 
@@ -96,9 +98,7 @@ public class Top100Controller {
             }
         };
 
-        top100AddButton.setCellFactory(cellFactory2);
-
-        // top100SongTable.getColumns().add(top100AddButton);
+        top10AddButton.setCellFactory(cellFactory2);
 
     }
 
