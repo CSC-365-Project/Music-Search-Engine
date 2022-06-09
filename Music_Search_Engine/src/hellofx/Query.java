@@ -565,7 +565,7 @@ public class Query {
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-8'";
+        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-8' limit 10";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
@@ -605,7 +605,7 @@ public class Query {
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String sql = "SELECT * FROM Songs S WHERE publishDate BETWEEN '2022-5-9' AND '2022-6-9'ORDER BY S.popularity DESC LIMIT 100";
+        String sql = "SELECT * FROM Songs S WHERE publishDate BETWEEN '2022-5-9' AND '2022-6-9'ORDER BY S.popularity DESC LIMIT 10";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
@@ -659,11 +659,11 @@ public class Query {
         }
         return url;
     }
-    
-    public static int URLCheck(String url){
-        if (url.charAt(8) == 'o'){
+
+    public static int URLCheck(String url) {
+        if (url.charAt(8) == 'o') {
             return 0;
-        }else{
+        } else {
             return 1;
         }
     }
@@ -800,7 +800,5 @@ public class Query {
         }
         return songIDs;
     }
-
-
 
 }

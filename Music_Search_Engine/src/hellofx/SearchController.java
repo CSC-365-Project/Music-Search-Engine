@@ -97,7 +97,7 @@ public class SearchController {
             public TableCell<Album, Void> call(final TableColumn<Album, Void> param) {
                 final TableCell<Album, Void> cell = new TableCell<Album, Void>() {
 
-                    private final Button btn = new Button("Add");
+                    private final Button btn = new Button("+");
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Album data = getTableView().getItems().get(getIndex());
