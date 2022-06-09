@@ -53,11 +53,10 @@
             <Text fx:id="popularityNameText" layoutX="71.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             <Text layoutX="71.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="publish Date" />
             <Text fx:id="publishDateText" layoutX="71.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text layoutX="71.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist Description" />
-            <Text fx:id="artistDesText" layoutX="71.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             <Button fx:id="addFavButton" layoutX="505.0" layoutY="41.0" mnemonicParsing="false" text="Add" />
             <Button fx:id="playButton" layoutX="505.0" layoutY="345.0" mnemonicParsing="false" text="Play" />
             <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="&lt;" />
+            <Button fx:id="artistInfoButton" layoutX="67.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Artist Info" />
       </children>
     </AnchorPane>
   </children>

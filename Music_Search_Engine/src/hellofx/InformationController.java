@@ -33,14 +33,17 @@ public class InformationController {
     private Text popularityNameText;
     @FXML
     private Text publishDateText;
-    @FXML
-    private Text artistDesText;
+    // @FXML
+    // private Text artistDesText;
     @FXML
     private Button addFavButton;
     @FXML
     private Button playButton;
     @FXML
     private Button backButton;
+    @FXML
+    private Button artistInfoButton;
+
     private String email;
     private String songID;
 
@@ -55,7 +58,7 @@ public class InformationController {
         genreNameText.setText(infoList.get(3));
         popularityNameText.setText(infoList.get(4));
         publishDateText.setText(infoList.get(6));
-        artistDesText.setText(infoList.get(7));
+        //artistDesText.setText(infoList.get(7));
 
     }
 
@@ -84,6 +87,21 @@ public class InformationController {
                 Query.addToFavList(songID, email);
             }
 
+        });
+
+        artistInfoButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Query.init();
+                List<String> infoList = Query.getSongDisplayInfo(songID);
+                String url = infoList.get(7);
+                                    
+                try {
+                    Desktop.getDesktop().browse(new URL(url).toURI());
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         playButton.setOnAction(new EventHandler<ActionEvent>() {
