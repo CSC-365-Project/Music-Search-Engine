@@ -35,7 +35,8 @@ public class HomeController {
 
     public void initData(String email) {
         Query.init();
-        user_name.setText("Hello," + email);
+        String name = Query.getUserName(email);
+        user_name.setText("Hello," + name);
         this.email = email;
     }
 

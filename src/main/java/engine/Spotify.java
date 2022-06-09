@@ -114,9 +114,19 @@ public class Spotify {
     }
 
     public static void main(String[] args) {
-//        for (int i=0; i < 15; i++) {
-//            insertPlaylisttoDB("3A3mKLYy2PiZOXk7YDZtbR", i*100);
-//        }
-        System.out.println("hello");
+        for (int i=0; i < 10; i++) {
+            insertPlaylisttoDB("3dNtvyCkVtUvLHfP7Zza6z", i*100);
+        }
+
+        for (int i=0; i < 11; i++) {
+            insertPlaylisttoDB("6OAF6gkxAe4lqHdSLmGpdd", i*100);
+        }
+
+        for (int i=0; i < 15; i++) {
+            insertPlaylisttoDB("1zODeCk65uvcFt1wWNHgBU", i*100);
+        }
+        for (int i=0; i < 15; i++) {
+            insertPlaylisttoDB("3vgjs4csDmI6ARbSHnq42v", i*100);
+        }
     }
 }
