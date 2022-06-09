@@ -54,8 +54,8 @@ public class newlyReleasedController {
             String artistName = Query.findArtistNamebyID(songID);
             Query.init();
             String genre = Query.findGenrebyID(songID);
-            System.out.println(songName);
-            displayList.add(new Album(songName, artistName, genre, songID));
+            String url = Query.getURL(songID);
+            displayList.add(new Album(songName, artistName, genre, songID, url));
         }
         newlyReleasedSongNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
         newlyReleasedSongArtistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));

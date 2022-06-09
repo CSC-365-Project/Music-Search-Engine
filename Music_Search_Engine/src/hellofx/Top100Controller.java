@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
@@ -34,6 +35,8 @@ public class Top100Controller {
     private TableColumn<Album, Void> top100AddButton;
     @FXML
     private Button backButton;
+    @FXML
+    private TableColumn<Album, Hyperlink> uRLColumn;
     private String email;
 
     public void initData(String email) {
@@ -54,8 +57,9 @@ public class Top100Controller {
             String artistName = Query.findArtistNamebyID(songID);
             Query.init();
             String genre = Query.findGenrebyID(songID);
-            System.out.println(songName);
-            displayList.add(new Album(songName, artistName, genre, songID));
+            Query.init();
+            String url = Query.getURL(songID);
+            displayList.add(new Album(songName, artistName, genre, songID, url));
         }
         top100songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
         top100ArtistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
@@ -96,7 +100,7 @@ public class Top100Controller {
 
         top100AddButton.setCellFactory(cellFactory2);
 
-        top100SongTable.getColumns().add(top100AddButton);
+        // top100SongTable.getColumns().add(top100AddButton);
 
     }
 
