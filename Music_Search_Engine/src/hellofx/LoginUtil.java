@@ -59,6 +59,20 @@ public class LoginUtil {
         stage.show();
     }
 
+    public static void changeSceneInformation(ActionEvent event, String fxmlFile, String title, String email,
+            String songID)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
+        InformationController controller = loader.getController();
+        controller.initData(email, songID);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
     public static void changeSceneNewlyReleased(ActionEvent event, String fxmlFile, String title, String email)
             throws IOException {
         Parent root = null;
