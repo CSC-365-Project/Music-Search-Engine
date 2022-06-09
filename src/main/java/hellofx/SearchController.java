@@ -49,7 +49,9 @@ public class SearchController {
     @FXML
     private Button byGenre;
     private String email;
-
+    public void initEmail(String email){
+        this.email = email;
+    }
     public void initData(String searchText, String email) {
         Query.init();
         this.email = email;
@@ -65,7 +67,9 @@ public class SearchController {
                 String artistName = Query.findArtistNamebyID(songID);
                 Query.init();
                 String genre = Query.findGenrebyID(songID);
-                displayList.add(new Album(songName, artistName, genre, songID));
+                Query.init();
+                String url = Query.getURL(songID);
+                displayList.add(new Album(songName, artistName, genre, songID, url));
             }
         } else {
             Query.init();
@@ -77,7 +81,9 @@ public class SearchController {
                 String artistName = Query.findArtistNamebyID(songID);
                 Query.init();
                 String genre = Query.findGenrebyID(songID);
-                displayList.add(new Album(songName, artistName, genre, songID));
+                Query.init();
+                String url = Query.getURL(songID);
+                displayList.add(new Album(songName, artistName, genre, songID, url));
             }
         }
         songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
@@ -93,13 +99,19 @@ public class SearchController {
             public TableCell<Album, Void> call(final TableColumn<Album, Void> param) {
                 final TableCell<Album, Void> cell = new TableCell<Album, Void>() {
 
-                    private final Button btn = new Button("Add");
+                    private final Button btn = new Button("+");
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Album data = getTableView().getItems().get(getIndex());
                             Query.init();
                             String songId = data.getSongID();
-
+                            try {
+                                LoginUtil.changeSceneInformation(event, "information.fxml", "Information Page", email,
+                                        songId);
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
                         });
                     }
 
@@ -167,12 +179,15 @@ public class SearchController {
                     String artistName = Query.findArtistNamebyID(songID);
                     Query.init();
                     String genre = Query.findGenrebyID(songID);
-                    displayList.add(new Album(songName, artistName, genre, songID));
+                    Query.init();
+                    String url = Query.getURL(songID);
+                    displayList.add(new Album(songName, artistName, genre, songID, url));
                 }
                 songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
                 artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
                 genreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
                 songTable.setItems(displayList);
+                addButtonToTable();
             }
 
         });
@@ -191,12 +206,16 @@ public class SearchController {
                     String artistName = Query.findArtistNamebyID(songID);
                     Query.init();
                     String genre = Query.findGenrebyID(songID);
-                    displayList.add(new Album(songName, artistName, genre, songID));
+                    Query.init();
+                    String url = Query.getURL(songID);
+
+                    displayList.add(new Album(songName, artistName, genre, songID, url));
                 }
                 songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
                 artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
                 genreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
                 songTable.setItems(displayList);
+                addButtonToTable();
             }
 
         });
@@ -216,12 +235,15 @@ public class SearchController {
                     String artistName = Query.findArtistNamebyID(songID);
                     Query.init();
                     String genre = Query.findGenrebyID(songID);
-                    displayList.add(new Album(songName, artistName, genre, songID));
+                    Query.init();
+                    String url = Query.getURL(songID);
+                    displayList.add(new Album(songName, artistName, genre, songID, url));
                 }
                 songNameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("songName"));
                 artistColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("artistName"));
                 genreColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("genre"));
                 songTable.setItems(displayList);
+                addButtonToTable();
             }
 
         });

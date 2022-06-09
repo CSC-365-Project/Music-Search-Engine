@@ -1,5 +1,3 @@
-
-
 package hellofx;
 
 import java.io.IOException;
@@ -15,7 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class LoginUtil {
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String email,
-                                   String password, String searchText)
+            String password, String searchText)
             throws IOException {
         Parent root = null;
         Query.init();
@@ -48,32 +46,76 @@ public class LoginUtil {
         stage.show();
     }
 
-    public static void changeSceneTop100(ActionEvent event, String fxmlFile, String title, String email)
+    public static void changeSceneTop10(ActionEvent event, String fxmlFile, String title, String email)
             throws IOException {
-        System.out.println("In change scene top 100");
-        System.out.println("s1");
         Parent root = null;
-        System.out.println("s2");
         FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
         root = loader.load();
-        System.out.println("s3");
-        Top100Controller controller = loader.getController();
-        System.out.println("s4");
+        Top10Controller controller = loader.getController();
         controller.initData(email);
-        System.out.println("s5");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        System.out.println("s6");
         stage.setTitle(title);
-
-        System.out.println("s7");
         stage.setScene(new Scene(root, 600, 400));
-        System.out.println("s8");
         stage.show();
-        System.out.println("s9");
+    }
+
+    public static void changeSceneInformation(ActionEvent event, String fxmlFile, String title, String email,
+            String songID)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
+        InformationController controller = loader.getController();
+        String url = Query.getURL(songID);
+        controller.init(url);
+        controller.initData(email, songID);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
+    public static void changeSceneNewlyReleased(ActionEvent event, String fxmlFile, String title, String email)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
+        newlyReleasedController controller = loader.getController();
+        controller.initData(email);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
+    public static void changeSceneFavorite(ActionEvent event, String fxmlFile, String title, String email)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
+        FavoriteController controller = loader.getController();
+        controller.initData(email);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
+    public static void changeSceneSearch(ActionEvent event, String fxmlFile, String title, String email)
+            throws IOException {
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
+        root = loader.load();
+        SearchController controller = loader.getController();
+        controller.initEmail(email);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
     }
 
     public static void signUpUser(ActionEvent event, TextField email, TextField username, TextField password,
-                                  TextField password_conf, String fxmlFile) throws IOException {
+            TextField password_conf, String fxmlFile) throws IOException {
         Query.init();
         Parent root = null;
         if (!email.getText().trim().isEmpty() && !username.getText().trim().isEmpty()

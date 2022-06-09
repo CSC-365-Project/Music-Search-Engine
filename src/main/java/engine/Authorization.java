@@ -9,8 +9,8 @@ import se.michaelthelin.spotify.requests.authorization.client_credentials.Client
 import java.io.IOException;
 
 public class Authorization {
-    private static final String clientId = "5f3abdca57f44d56a627b98b1e149cfb";
-    private static final String clientSecret = "faca437653f04dd391e555e2585d070c";
+    private static final String clientId = "f937abf204f4407dacda0dc8ebf86bab";
+    private static final String clientSecret = "b1467f8bd87b4f758fc9aeed0e115b18";
 
     private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
             .setClientId(clientId)

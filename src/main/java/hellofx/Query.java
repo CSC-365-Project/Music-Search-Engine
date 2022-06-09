@@ -22,7 +22,6 @@ public class Query {
         connect.close();
     }
 
-
     // // Sample query to return all song in the Song table
     // public static List<List<String>> getAllSong() {
     // // sample query
@@ -273,7 +272,7 @@ public class Query {
 
     public static String findGenrebyID(String songID) {
         String genre = "";
-        String sql = "select G.name from Genres G, Songs S where G.genreID = S.genreName and S.songID = ?";
+        String sql = "select genreName from Songs where songID = ?";
 
         PreparedStatement statement;
         try {
@@ -281,7 +280,7 @@ public class Query {
             statement.setString(1, songID);
             ResultSet rs = statement.executeQuery();
             if (rs.next())
-                genre = rs.getString("name");
+                genre = rs.getString("genreName");
 
             statement.close();
             connect.close();
@@ -317,7 +316,7 @@ public class Query {
     // return a list of song IDs with the same name
     public static List<String> searchByName(String songName) {
         List<String> songIDs = new ArrayList<String>();
-        String sql = "select S.songID from Songs S where S.songName = ?";
+        String sql = "select S.songID from Songs S where S.songName = ? limit 10";
 
         PreparedStatement statement;
         try {
@@ -341,7 +340,7 @@ public class Query {
 
     public static List<String> searchByArtist(String artistName) {
         List<String> songIDs = new ArrayList<String>();
-        String sql = "select S.songID from Songs S, Artists A where S.artistID = A.artistID and A.artistName = ?";
+        String sql = "select S.songID from Songs S, Artists A where S.artistID = A.artistID and A.artistName = ? limit 10";
 
         PreparedStatement statement;
         try {
@@ -365,7 +364,7 @@ public class Query {
 
     public static List<String> searchByGenre(String genreName) {
         List<String> songIDs = new ArrayList<String>();
-        String sql = "select S.songID from Genres G, Songs S where G.genreID = S.genreName and G.name = ?";
+        String sql = "select songID from Songs where genreName = ? limit 10";
 
         PreparedStatement statement;
         try {
@@ -436,7 +435,7 @@ public class Query {
     }
 
     public static void addToFavList(String songID, String userEmail) {
-        String sql = "insert into Favorite(userEmail, songID)values(?,?);";
+        String sql = "insert into Favorite(userEmail, songID)values(?,?)";
 
         PreparedStatement statement;
         try {
@@ -448,11 +447,10 @@ public class Query {
 
             statement.close();
             connect.close();
-
+            System.out.print("insert success!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.print("insert success!");
     }
 
     public static List<String> getSongInAlbums(String albumName) {
@@ -570,7 +568,7 @@ public class Query {
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-7'";
+        String sql = "SELECT * FROM Songs WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-8' limit 10";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
@@ -578,6 +576,7 @@ public class Query {
 
             // sample printing
             while (rs.next()) {
+                String songID = rs.getString("songID");
                 String songName = rs.getString("songName");
                 String url = rs.getString("url");
                 String popularity = rs.getString("popularity");
@@ -585,6 +584,7 @@ public class Query {
                 String date = rs.getString("publishDate");
 
                 List<String> info = new ArrayList<>();
+                info.add(songID);
                 info.add(songName);
                 info.add(url);
                 info.add(popularity);
@@ -608,7 +608,7 @@ public class Query {
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String sql = "SELECT * FROM Songs S WHERE publishDate BETWEEN '2022-6-1' AND '2022-6-7'ORDER BY S.popularity DESC LIMIT 100";
+        String sql = "SELECT * FROM Songs S WHERE publishDate BETWEEN '2021-5-9' AND '2022-6-9' ORDER BY S.popularity DESC LIMIT 10";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
@@ -663,8 +663,87 @@ public class Query {
         return url;
     }
 
+    public static String getUserName(String userEmail) {
+        String url = "";
+        String sql = "SELECT name FROM Users WHERE email = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, userEmail);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+                url = rs.getString("name");
+
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
+
+    public static int URLCheck(String url) {
+        if (url.charAt(8) == 'o') {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public static List<String> getSongDisplayInfo(String songID) {
+        // sample query
+        List<String> res = new ArrayList<>();
+
+        String sql = "SELECT\n" +
+                "    S.songName,\n" +
+                "    A.artistName,\n" +
+                "    A2.albumName,\n" +
+                "    S.genreName,\n" +
+                "    S.popularity,\n" +
+                "    S.url,\n" +
+                "    S.publishDate,\n" +
+                "    A.description\n" +
+                "FROM (select * from Songs where songID = ?) as S\n" +
+                "         JOIN Artists A on S.artistID = A.artistID\n" +
+                "         JOIN Albums A2 on S.albumID = A2.albumID;";
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, songID);
+            ResultSet rs = statement.executeQuery();
+            // sample printing
+            while (rs.next()) {
+                String songName = rs.getString("songName");
+                String artistName = rs.getString("artistName");
+                String albumName = rs.getString("albumName");
+                String genreName = rs.getString("genreName");
+                String popularity = rs.getString("popularity");
+                String url = rs.getString("url");
+                String publishDate = rs.getString("publishDate");
+                String description = rs.getString("description");
+
+                res.add(songName);
+                res.add(artistName);
+                res.add(albumName);
+                res.add(genreName);
+                res.add(popularity);
+                res.add(url);
+                res.add(publishDate);
+                res.add(description);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
     public static void insertSong(List<String> songInfo) {
-        String sql = "insert into Songs(songID, songName, url, popularity, duration, publishDate, albumID, artistID, genreName) " +
+        String sql = "insert into Songs(songID, songName, url, popularity, duration, publishDate, albumID, artistID, genreName) "
+                +
                 "values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
         PreparedStatement stmt = null;
         try {
@@ -702,6 +781,7 @@ public class Query {
             System.out.println("Error: " + e);
         }
     }
+
     public static void insertAlbum(List<String> Info) {
         String sql = "insert into Albums(albumID, albumName, artistID, publishDate) " +
                 "values(?, ?, ?, ?);";
@@ -719,4 +799,30 @@ public class Query {
             System.out.println("Error: " + e);
         }
     }
+
+    public static List<String> getSongIDByEmail(String userEmail) {
+        String sql = "select songID from Favorite where userEmail = ?";
+        List<String> songIDs = new ArrayList<String>();
+        String songID = "";
+
+        PreparedStatement statement;
+
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, userEmail);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                songID = rs.getString("songID");
+                songIDs.add(songID);
+            }
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return songIDs;
+    }
+
 }

@@ -7,7 +7,7 @@
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofx.Controller">
     <children>
         <Label fx:id="label" text="Label" />
-        <Button text="Sign In"
+        <Button text="Sign In"     
         />
     </children>
 </StackPane>
