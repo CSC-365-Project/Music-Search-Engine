@@ -34,7 +34,7 @@ public class SignInController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    LoginUtil.changeScene(event, "login.fxml", "Login", null, null);
+                    LoginUtil.changeScene(event, "login.fxml", "Login", null, null,null);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -44,7 +44,12 @@ public class SignInController implements Initializable {
         signUp_button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                LoginUtil.signUpUser(event, email_in, usrName_in, usrPass_in, usrPass_conf);
+                try {
+                    LoginUtil.signUpUser(event, email_in, usrName_in, usrPass_in, usrPass_conf, "login.fxml");
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
     }
