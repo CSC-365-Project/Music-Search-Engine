@@ -659,6 +659,14 @@ public class Query {
         }
         return url;
     }
+    
+    public static int URLCheck(String url){
+        if (url.charAt(8) == 'o'){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 
     public static List<String> getSongDisplayInfo(String songID) {
         // sample query
@@ -767,5 +775,32 @@ public class Query {
             System.out.println("Error: " + e);
         }
     }
+
+    public static List<String> getSongIDByEmail(String userEmail) {
+        String sql = "select songID from Favorite where userEmail = ?";
+        List<String> songIDs = new ArrayList<String>();
+        String songID = "";
+
+        PreparedStatement statement;
+
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, userEmail);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                songID = rs.getString("songID");
+                songIDs.add(songID);
+            }
+            statement.close();
+            connect.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return songIDs;
+    }
+
+
 
 }
