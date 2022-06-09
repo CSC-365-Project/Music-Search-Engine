@@ -2,7 +2,10 @@
 package hellofx;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
+import java.awt.Desktop;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 
 public class InformationController {
@@ -77,6 +82,27 @@ public class InformationController {
                 // TODO Auto-generated method stub
                 Query.init();
                 Query.addToFavList(songID, email);
+            }
+
+        });
+
+        playButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO Auto-generated method stub
+                Query.init();
+                String url = Query.getURL(songID);
+                if (url.contains("open")) {
+                    try {
+                        Desktop.getDesktop().browse(new URL(url).toURI());
+                    } catch (IOException | URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Media media = new Media(url);
+                    MediaPlayer player = new MediaPlayer(media);
+                    player.play();
+                }
             }
 
         });

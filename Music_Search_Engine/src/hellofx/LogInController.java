@@ -33,21 +33,21 @@ public class LogInController {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    LoginUtil.changeScene(event, "home.fxml", "Home Page", "test01@gmail.com", "test01", null);
-                    /*
-                     * if (!email_in.getText().trim().isEmpty() &&
-                     * !pass_in.getText().trim().isEmpty()) {
-                     * LoginUtil.changeScene(event, "home.fxml", "Home Page",
-                     * email_in.getText().trim()
-                     * , pass_in.getText().trim(),null);
-                     * } else {
-                     * Alert a = new Alert(AlertType.WARNING);
-                     * a.setTitle("Alert");
-                     * a.setContentText("password or user name is empty");
-                     * a.show();
-                     * return;
-                     * }
-                     */
+                    // LoginUtil.changeScene(event, "home.fxml", "Home Page", "test01@gmail.com",
+                    // "test01", null);
+
+                    if (!email_in.getText().trim().isEmpty() &&
+                            !pass_in.getText().trim().isEmpty()) {
+                        LoginUtil.changeScene(event, "home.fxml", "Home Page",
+                                email_in.getText().trim(), pass_in.getText().trim(), null);
+                    } else {
+                        Alert a = new Alert(AlertType.WARNING);
+                        a.setTitle("Alert");
+                        a.setContentText("password or user name is empty");
+                        a.show();
+                        return;
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
