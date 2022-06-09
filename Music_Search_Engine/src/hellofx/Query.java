@@ -431,7 +431,7 @@ public class Query {
     }
 
     public static void addToFavList(String songID, String userEmail) {
-        String sql = "insert into Favorite(userEmail, songID)values(?,?);";
+        String sql = "insert into Favorite(userEmail, songID)values(?,?)";
 
         PreparedStatement statement;
         try {

@@ -2,6 +2,11 @@
 package hellofx;
 
 import java.io.IOException;
+import java.util.List;
+import java.awt.Desktop;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,7 +29,7 @@ public class HomeController {
     @FXML
     private Button newlyReleasedButton;
     @FXML
-    private Button newButton;
+    private Button playSongButtom;
 
     private String email;
 
@@ -76,5 +81,33 @@ public class HomeController {
             }
 
         });
+
+    //     playSongButtom.setOnAction(new EventHandler<ActionEvent>() {
+
+    //         @Override
+    //         public void handle(ActionEvent event) {
+    //             // TODO Auto-generated method stub
+    //             ObservableList<Album> displayList = FXCollections.observableArrayList();
+    //             Query.init();
+    //             List<String> listOfID = Query.searchByName(searchText.getText().trim());
+    //             String songID = Query.
+    //                 Query.init();
+    //                 String url = Query.getURL(songID);
+
+    //         }
+    //     });
+
+    // //     public static void playMedia(String url){
+    // //         Media media = new Media(url);
+    // //         MediaPlayer player = new MediaPlayer(media);
+    // //         player.play();
+    // //    }
+    // //    public static void openWebpage(String url) {
+    // //        try {
+    // //            Desktop.getDesktop().browse(new URL(url).toURI());
+    // //        } catch (IOException | URISyntaxException e) {
+    // //            e.printStackTrace();
+    // //        }
+    // //    }
     }
 }
