@@ -103,7 +103,7 @@ public class SearchController {
                             Album data = getTableView().getItems().get(getIndex());
                             Query.init();
                             String songId = data.getSongID();
-
+                            
                         });
                     }
 
