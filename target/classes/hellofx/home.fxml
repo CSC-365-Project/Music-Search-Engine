@@ -5,20 +5,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofx.HomeController">
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2B3856#2B3856;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofx.HomeController">
    <children>
-      <Text layoutX="70.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="104.79995117187514">
+      <Text fill="#5fa194" layoutX="70.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="104.79995117187514">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text fx:id="user_name" layoutX="185.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="285.336669921875">
+      <Text fx:id="user_name" fill="#5fa194" layoutX="185.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="285.336669921875">
          <font>
             <Font size="24.0" />
          </font></Text>
-      <Button fx:id="searchButton" layoutX="514.0" layoutY="25.0" mnemonicParsing="false" text="Search" />
-      <Button fx:id="favoriteButton" layoutX="70.0" layoutY="117.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="186.0" text="My Favorite" />
-      <Button fx:id="top10Button" layoutX="70.0" layoutY="208.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="186.0" text="Top 10 of the Month" />
-      <Button fx:id="newlyReleasedButton" layoutX="70.0" layoutY="301.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="186.0" text="What's New!" />
+      <Button fx:id="searchButton" layoutX="477.0" layoutY="46.0" mnemonicParsing="false" style="-fx-background-color: #3B9C9C#3B9C9C;" text="Search" textFill="#f8e79c" />
+      <Button fx:id="favoriteButton" layoutX="70.0" layoutY="117.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="186.0" style="-fx-background-color: #F5F5DC#F5F5DC;" text="My Favorite" textFill="#355e56" />
+      <Button fx:id="top10Button" layoutX="70.0" layoutY="208.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="186.0" style="-fx-background-color: #F5F5DC#F5F5DC;" text="Top 10 of the Month" textFill="#345b53" />
+      <Button fx:id="newlyReleasedButton" layoutX="70.0" layoutY="301.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="186.0" style="-fx-background-color: #F5F5DC#F5F5DC;" text="What's New!" textFill="#45756c" />
    </children>
 </AnchorPane>
