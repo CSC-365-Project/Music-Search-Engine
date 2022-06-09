@@ -659,5 +659,111 @@ public class Query {
         }
         return url;
     }
+    
+    public static List<String> getSongDisplayInfo(String songID) {
+        // sample query
+        List<String> res = new ArrayList<>();
+
+        String sql = "SELECT\n" +
+                "    S.songName,\n" +
+                "    A.artistName,\n" +
+                "    A2.albumName,\n" +
+                "    S.genreName,\n" +
+                "    S.popularity,\n" +
+                "    S.url,\n" +
+                "    S.publishDate,\n" +
+                "    A.description\n" +
+                "FROM (select * from Songs where songID = ?) as S\n" +
+                "         JOIN Artists A on S.artistID = A.artistID\n" +
+                "         JOIN Albums A2 on S.albumID = A2.albumID;";
+        PreparedStatement statement;
+        try {
+            statement = connect.prepareStatement(sql);
+            statement.setString(1, songID);
+            ResultSet rs = statement.executeQuery();
+            // sample printing
+            while (rs.next()) {
+                String songName = rs.getString("songName");
+                String artistName = rs.getString("artistName");
+                String albumName = rs.getString("albumName");
+                String genreName = rs.getString("genreName");
+                String popularity = rs.getString("popularity");
+                String url = rs.getString("url");
+                String publishDate = rs.getString("publishDate");
+                String description = rs.getString("description");
+
+                res.add(songName);
+                res.add(artistName);
+                res.add(albumName);
+                res.add(genreName);
+                res.add(popularity);
+                res.add(url);
+                res.add(publishDate);
+                res.add(description);
+            }
+            statement.close();
+            connect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
+    public static void insertSong(List<String> songInfo) {
+        String sql = "insert into Songs(songID, songName, url, popularity, duration, publishDate, albumID, artistID, genreName) " +
+                "values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        PreparedStatement stmt = null;
+        try {
+            stmt = connect.prepareStatement(sql);
+            stmt.setString(1, songInfo.get(0));
+            stmt.setString(2, songInfo.get(1));
+            stmt.setString(3, songInfo.get(2));
+            stmt.setInt(4, Integer.parseInt(songInfo.get(3)));
+            stmt.setInt(5, Integer.parseInt(songInfo.get(4)));
+            stmt.setDate(6, Date.valueOf(songInfo.get(5)));
+            stmt.setString(7, songInfo.get(6));
+            stmt.setString(8, songInfo.get(7));
+            stmt.setString(9, songInfo.get(8));
+            stmt.executeUpdate();
+            System.out.println("Records inserted");
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    public static void insertArtist(List<String> Info) {
+        String sql = "insert into Artists(artistID, artistName, follower, description) values(?, ?, ?, ?);";
+        PreparedStatement stmt = null;
+        try {
+            stmt = connect.prepareStatement(sql);
+            stmt.setString(1, Info.get(0));
+            stmt.setString(2, Info.get(1));
+            stmt.setInt(3, Integer.parseInt(Info.get(2)));
+            stmt.setString(4, Info.get(3));
+            stmt.executeUpdate();
+            System.out.println("Artist inserted");
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+    }
+    public static void insertAlbum(List<String> Info) {
+        String sql = "insert into Albums(albumID, albumName, artistID, publishDate) " +
+                "values(?, ?, ?, ?);";
+        PreparedStatement stmt = null;
+        try {
+            stmt = connect.prepareStatement(sql);
+            stmt.setString(1, Info.get(0));
+            stmt.setString(2, Info.get(1));
+            stmt.setString(3, Info.get(2));
+            stmt.setDate(4, Date.valueOf(Info.get(3)));
+            stmt.executeUpdate();
+            System.out.println("Album inserted");
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+    }
 
 }
