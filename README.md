@@ -36,7 +36,7 @@ A music search engine that can not only search songs by filtering, but also stor
 ![](https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/uml.png?raw=true)  |  ![](https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/Songs%20Table.png?raw=true)
 #### User Stories
   * As user, I want to be able to search music by name, artist, and genre.<br />
-  <img src = "https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/Search%20By%20Song%20Name.png" width ="33%" /> <img src = "https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/Search%20By%20Artist.png" width ="33%" /> <img src = "https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/Search%20By%20Genre.png" width ="33%" />
+  <img src = "https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/Search%20By%20Song%20Name.png" width ="32%" /> <img src = "https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/Search%20By%20Artist.png" width ="32%" /> <img src = "https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/Search%20By%20Genre.png" width ="32%" />
   * As user, I want a favorite list so I can keep track of musics I like.<br />
   <p align="center">
   <img src = "https://github.com/CSC-365-Project/Music-Search-Engine/blob/main/img/Favorite.png" width ="75%" /> 
