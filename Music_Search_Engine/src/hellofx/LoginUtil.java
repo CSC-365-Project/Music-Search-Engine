@@ -104,6 +104,8 @@ public class LoginUtil {
         Parent root = null;
         FXMLLoader loader = new FXMLLoader(LoginUtil.class.getResource(fxmlFile));
         root = loader.load();
+        SearchController controller = loader.getController();
+        controller.initData("", email);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         stage.setScene(new Scene(root, 600, 400));

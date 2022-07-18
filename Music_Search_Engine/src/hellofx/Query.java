@@ -62,7 +62,7 @@ public class Query {
         // sample query
         List<List<String>> res = new ArrayList<>();
 
-        String sql = "select * from Songs;";
+        String sql = "select * from Songs LIMIT 10;";
         PreparedStatement statement;
         try {
             statement = connect.prepareStatement(sql);
